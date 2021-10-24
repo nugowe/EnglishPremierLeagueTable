@@ -3,6 +3,7 @@ library(tidyverse)
 library(rvest)
 library(kableExtra)
 library(gt)
+library(blastula)
 
 
 
@@ -11,7 +12,7 @@ url <- "https://en.wikipedia.org/wiki/2021%E2%80%9322_Premier_League"
 
 session = bow(user_agent = "EPL-Table-Scrape", url)
 
-EPLTable <- scrape(session) %>% html_nodes("table.wikitable:nth-child(26)") %>% html_table()
+EPLTable <- scrape(session) %>% html_nodes("table.wikitable:nth-child(27)") %>% html_table()
 
 WebscrapeTime <- format(Sys.time(), "%A %B %Y, %H:%M:%S (CST)")
 
@@ -1392,36 +1393,36 @@ gt(EPLTable) %>%
     
     title = md("<img src='https://upload.wikimedia.org/wikipedia/en/f/f2/Premier_League_Logo.svg' style='height:70px;'> "),
     subtitle = md("*League Table Standings for the **2021/2022** Season*")) %>% cols_align(
-  align = "center",
-  columns = 1
-) %>% cols_align(
-  align = "left",
-  columns = 2
-) %>% cols_align(
-  align = "center",
-  columns = 3
-) %>% cols_align(
-  align = "right",
-  columns = 4
-) %>% cols_align(
-  align = "right",
-  columns = 5
-) %>% cols_align(
-  align = "right",
-  columns = 7
-) %>% cols_align(
-  align = "right",
-  columns = 8
-) %>% cols_align(
-  align = "right",
-  columns = 9
-) %>% cols_align(
-  align = "center",
-  columns = 10
-) %>% cols_align(
-  align = "center",
-  columns = 11
-)  %>%
+      align = "center",
+      columns = 1
+    ) %>% cols_align(
+      align = "left",
+      columns = 2
+    ) %>% cols_align(
+      align = "center",
+      columns = 3
+    ) %>% cols_align(
+      align = "right",
+      columns = 4
+    ) %>% cols_align(
+      align = "right",
+      columns = 5
+    ) %>% cols_align(
+      align = "right",
+      columns = 7
+    ) %>% cols_align(
+      align = "right",
+      columns = 8
+    ) %>% cols_align(
+      align = "right",
+      columns = 9
+    ) %>% cols_align(
+      align = "center",
+      columns = 10
+    ) %>% cols_align(
+      align = "center",
+      columns = 11
+    )  %>%
   tab_options(table.font.size = px(11)) %>%  opt_table_font(
     font = list(
       google_font(name = "Roboto Condensed")
@@ -1436,7 +1437,56 @@ gt(EPLTable) %>%
   )%>%  data_color(
     
     columns = "Pld",
-    colors = scales::col_numeric("Blues", n = 2 , domain = NULL),
+    colors = scales::col_numeric("#488A99", n = 2 , domain = NULL),
+    alpha = NULL,
+    apply_to = c("fill", "text"),
+    autocolor_text = TRUE
+  ) %>% data_color(
+    
+    columns = "W",
+    colors = scales::col_numeric("#1C4E80", n = 2 , domain = NULL),
+    alpha = NULL,
+    apply_to = c("fill", "text"),
+    autocolor_text = TRUE
+  ) %>% data_color(
+    
+    columns = "D",
+    colors = scales::col_numeric("#CED2CC", n = 2 , domain = NULL),
+    alpha = NULL,
+    apply_to = c("fill", "text"),
+    autocolor_text = TRUE
+  ) %>% data_color(
+    
+    columns = "L",
+    colors = scales::col_numeric("#AC3E31", n = 2 , domain = NULL),
+    alpha = NULL,
+    apply_to = c("fill", "text"),
+    autocolor_text = TRUE
+  ) %>% data_color(
+    
+    columns = "GF",
+    colors = scales::col_numeric("#7E909A", n = 2 , domain = NULL),
+    alpha = NULL,
+    apply_to = c("fill", "text"),
+    autocolor_text = TRUE
+  ) %>% data_color(
+    
+    columns = "GA",
+    colors = scales::col_numeric("#A5D8DD", n = 2 , domain = NULL),
+    alpha = NULL,
+    apply_to = c("fill", "text"),
+    autocolor_text = TRUE
+  ) %>% data_color(
+    
+    columns = "Pts",
+    colors = scales::col_numeric("Greens", n = 2 , domain = NULL),
+    alpha = NULL,
+    apply_to = c("fill", "text"),
+    autocolor_text = TRUE
+  ) %>% data_color(
+    
+    columns = "GD",
+    colors = scales::col_factor("#DBAE58", n = 2 , domain = NULL),
     alpha = NULL,
     apply_to = c("fill", "text"),
     autocolor_text = TRUE
@@ -1471,25 +1521,13 @@ gt(EPLTable) %>%
   opt_table_font(
     font = list(
       google_font(name = "Roboto Condensed")
-     
+      
     )
   ) %>% tab_options(column_labels.font.size = 11.5, column_labels.font.weight = "bold", data_row.padding = px(5)) %>% tab_source_note(
     source_note = md("*Source: Wikipedia*")
   )%>% tab_source_note(
     source_note = md(sprintf("Last successful Webscrape time was %s", WebscrapeTime ))
-  )
-
-
-  
-
-
-  
-
-    
-
-
-
-
+  ) %>% gtsave("EPLTable.png", path = '/')
 
 
 
