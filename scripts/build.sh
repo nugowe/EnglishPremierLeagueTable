@@ -5,7 +5,7 @@ set -x
 CURRENT_TIME=$(date "+%Y.%m.%d-%H.%M.%S")
 
 
-sudo apt-get install -yq tzdata && ln -fs /usr/share/zoneinfo/America/Chicago /etc/localtime && dpkg-reconfigure -f noninteractive tzdata
+sudo apt-get install -yq tzdata && sudo ln -fs /usr/share/zoneinfo/America/Chicago /etc/localtime && dpkg-reconfigure -f noninteractive tzdata
  
 
 Rscript $GITHUB_WORKSPACE/scripts/EPLTable.R
