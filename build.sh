@@ -23,3 +23,4 @@ aws cp s3://$S3_BUCKET/index/index.yaml index.yaml
 
 }
 
+INDEX_BUILD
