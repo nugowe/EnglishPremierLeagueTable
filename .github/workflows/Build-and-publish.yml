@@ -29,4 +29,4 @@ jobs:
           S3_BUCKET: epltable
           EPL_PNG_FILE: epltable.png
         run: |
-          ./scripts/build.sh
+          ./scripts/dockerbuild.sh
