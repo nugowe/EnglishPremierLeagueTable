@@ -31,4 +31,4 @@ jobs:
 
     - name: Copy EPLTable and index file to s3 Bucket
       run: |
-         ./scripts/adhocTransfer.sh
+         ./opt/epl/scripts/adhocTransfer.sh
