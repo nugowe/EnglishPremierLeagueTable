@@ -8,6 +8,6 @@ sudo apt-get install -yq tzdata && sudo ln -fs /usr/share/zoneinfo/America/Chica
 
 echo "obtaining R directory"
 
-Rscript /opt/epl/scripts/EPLTable.R
+/usr/bin/R /opt/epl/scripts/EPLTable.R
 
 
