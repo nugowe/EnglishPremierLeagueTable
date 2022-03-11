@@ -1,0 +1,31 @@
+name: Deploy Build-and-publish
+
+on:
+  push:
+    branches: [ EPL-modification ]
+    
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: code checkout
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-2
+      
+      env:
+        S3_BUCKET: epltable
+        EPL_PNG_FILE: epltable.png
+        AWS_DEFAULT_REGION: "us-east-1"
+      run: |
+        $GITHUB_WORKSPACE/scripts/build.sh  
+      
+  

@@ -1,9 +1,13 @@
+
+Rpackages=c("polite","rvest","kableExtra","gt","tidyverse")
+
+for (i in Rpackages){install.packages(i)} 
+
 library(polite)
 library(tidyverse)
 library(rvest)
 library(kableExtra)
 library(gt)
-library(blastula)
 
 
 
@@ -12,7 +16,7 @@ url <- "https://en.wikipedia.org/wiki/2021%E2%80%9322_Premier_League"
 
 session = bow(user_agent = "EPL-Table-Scrape", url)
 
-EPLTable <- scrape(session) %>% html_nodes("table.wikitable:nth-child(27)") %>% html_table()
+EPLTable <- scrape(session) %>% html_nodes("table.wikitable:nth-child(29)") %>% html_table()
 
 WebscrapeTime <- format(Sys.time(), "%A %B %Y, %H:%M:%S (CST)")
 
@@ -62,7 +66,7 @@ for(i in EPLTable$Team[1]){
   if(i == "Chelsea"){
     logolist <- append(logolist, logos[1])
     
-  }else if(i == "Liverpool"){
+  }else if(i == "Liverpool (X)"){
     
     logolist <- append(logolist, logos[2])
   }else if(i == "Manchester City"){
@@ -129,7 +133,7 @@ for(i in EPLTable$Team[2]){
   if(i == "Chelsea"){
     logolist <- append(logolist, logos[1])
     
-  }else if(i == "Liverpool"){
+  }else if(i == "Liverpool (X)"){
     
     logolist <- append(logolist, logos[2])
   }else if(i == "Manchester City"){
@@ -194,7 +198,7 @@ for(i in EPLTable$Team[3]){
   if(i == "Chelsea"){
     logolist <- append(logolist, logos[1])
     
-  }else if(i == "Liverpool"){
+  }else if(i == "Liverpool (X)"){
     
     logolist <- append(logolist, logos[2])
   }else if(i == "Manchester City"){
@@ -259,7 +263,7 @@ for(i in EPLTable$Team[4]){
   if(i == "Chelsea"){
     logolist <- append(logolist, logos[1])
     
-  }else if(i == "Liverpool"){
+  }else if(i == "Liverpool (X)"){
     
     logolist <- append(logolist, logos[2])
   }else if(i == "Manchester City"){
@@ -325,7 +329,7 @@ for(i in EPLTable$Team[5]){
   if(i == "Chelsea"){
     logolist <- append(logolist, logos[1])
     
-  }else if(i == "Liverpool"){
+  }else if(i == "Liverpool (X)"){
     
     logolist <- append(logolist, logos[2])
   }else if(i == "Manchester City"){
@@ -391,7 +395,7 @@ for(i in EPLTable$Team[6]){
   if(i == "Chelsea"){
     logolist <- append(logolist, logos[1])
     
-  }else if(i == "Liverpool"){
+  }else if(i == "Liverpool (X)"){
     
     logolist <- append(logolist, logos[2])
   }else if(i == "Manchester City"){
@@ -457,7 +461,7 @@ for(i in EPLTable$Team[7]){
   if(i == "Chelsea"){
     logolist <- append(logolist, logos[1])
     
-  }else if(i == "Liverpool"){
+  }else if(i == "Liverpool (X)"){
     
     logolist <- append(logolist, logos[2])
   }else if(i == "Manchester City"){
@@ -524,7 +528,7 @@ for(i in EPLTable$Team[8]){
   if(i == "Chelsea"){
     logolist <- append(logolist, logos[1])
     
-  }else if(i == "Liverpool"){
+  }else if(i == "Liverpool (X)"){
     
     logolist <- append(logolist, logos[2])
   }else if(i == "Manchester City"){
@@ -591,7 +595,7 @@ for(i in EPLTable$Team[9]){
   if(i == "Chelsea"){
     logolist <- append(logolist, logos[1])
     
-  }else if(i == "Liverpool"){
+  }else if(i == "Liverpool (X)"){
     
     logolist <- append(logolist, logos[2])
   }else if(i == "Manchester City"){
@@ -658,7 +662,7 @@ for(i in EPLTable$Team[10]){
   if(i == "Chelsea"){
     logolist <- append(logolist, logos[1])
     
-  }else if(i == "Liverpool"){
+  }else if(i == "Liverpool (X)"){
     
     logolist <- append(logolist, logos[2])
   }else if(i == "Manchester City"){
@@ -724,7 +728,7 @@ for(i in EPLTable$Team[11]){
   if(i == "Chelsea"){
     logolist <- append(logolist, logos[1])
     
-  }else if(i == "Liverpool"){
+  }else if(i == "Liverpool (X)"){
     
     logolist <- append(logolist, logos[2])
   }else if(i == "Manchester City"){
@@ -790,7 +794,7 @@ for(i in EPLTable$Team[12]){
   if(i == "Chelsea"){
     logolist <- append(logolist, logos[1])
     
-  }else if(i == "Liverpool"){
+  }else if(i == "Liverpool (X)"){
     
     logolist <- append(logolist, logos[2])
   }else if(i == "Manchester City"){
@@ -856,7 +860,7 @@ for(i in EPLTable$Team[13]){
   if(i == "Chelsea"){
     logolist <- append(logolist, logos[1])
     
-  }else if(i == "Liverpool"){
+  }else if(i == "Liverpool (X)"){
     
     logolist <- append(logolist, logos[2])
   }else if(i == "Manchester City"){
@@ -922,7 +926,7 @@ for(i in EPLTable$Team[14]){
   if(i == "Chelsea"){
     logolist <- append(logolist, logos[1])
     
-  }else if(i == "Liverpool"){
+  }else if(i == "Liverpool (X)"){
     
     logolist <- append(logolist, logos[2])
   }else if(i == "Manchester City"){
@@ -989,7 +993,7 @@ for(i in EPLTable$Team[15]){
   if(i == "Chelsea"){
     logolist <- append(logolist, logos[1])
     
-  }else if(i == "Liverpool"){
+  }else if(i == "Liverpool (X)"){
     
     logolist <- append(logolist, logos[2])
   }else if(i == "Manchester City"){
@@ -1056,7 +1060,7 @@ for(i in EPLTable$Team[16]){
   if(i == "Chelsea"){
     logolist <- append(logolist, logos[1])
     
-  }else if(i == "Liverpool"){
+  }else if(i == "Liverpool (X)"){
     
     logolist <- append(logolist, logos[2])
   }else if(i == "Manchester City"){
@@ -1124,7 +1128,7 @@ for(i in EPLTable$Team[17]){
   if(i == "Chelsea"){
     logolist <- append(logolist, logos[1])
     
-  }else if(i == "Liverpool"){
+  }else if(i == "Liverpool (X)"){
     
     logolist <- append(logolist, logos[2])
   }else if(i == "Manchester City"){
@@ -1191,7 +1195,7 @@ for(i in EPLTable$Team[18]){
   if(i == "Chelsea"){
     logolist <- append(logolist, logos[1])
     
-  }else if(i == "Liverpool"){
+  }else if(i == "Liverpool (X)"){
     
     logolist <- append(logolist, logos[2])
   }else if(i == "Manchester City"){
@@ -1258,7 +1262,7 @@ for(i in EPLTable$Team[19]){
   if(i == "Chelsea"){
     logolist <- append(logolist, logos[1])
     
-  }else if(i == "Liverpool"){
+  }else if(i == "Liverpool (X)"){
     
     logolist <- append(logolist, logos[2])
   }else if(i == "Manchester City"){
@@ -1324,7 +1328,7 @@ for(i in EPLTable$Team[20]){
   if(i == "Chelsea"){
     logolist <- append(logolist, logos[1])
     
-  }else if(i == "Liverpool"){
+  }else if(i == "Liverpool (X)"){
     
     logolist <- append(logolist, logos[2])
   }else if(i == "Manchester City"){
@@ -1527,7 +1531,7 @@ gt(EPLTable) %>%
     source_note = md("*Source: Wikipedia*")
   )%>% tab_source_note(
     source_note = md(sprintf("Last successful Webscrape time was %s", WebscrapeTime ))
-  ) %>% gtsave("EPLTable.png", path = '/')
+  ) %>% gtsave("EPLTable.png", path = '/$pwd/scripts/epltable.png')
 
 
 
