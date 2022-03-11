@@ -8,7 +8,8 @@ set -x
 
 sudo apt-get install -yq tzdata && sudo ln -fs /usr/share/zoneinfo/America/Chicago /etc/localtime && sudo dpkg-reconfigure -f noninteractive tzdata
 
-sudo apt-get install r-base
+
+sudo apt-get install r-base && chmod u+w /usr/local/lib/R/site-library
 
 
 Rscript $GITHUB_WORKSPACE/scripts/EPLTable.R
@@ -55,7 +56,7 @@ aws s3 cp $GITHUB_WORKSPACE/scripts/$EPL_PNG_FILE s3://$S3_BUCKET/epl/$EPL_PNG_F
 }
 
 
-aws s3api list-objects --bucket bucket-name --query "Contents[?contains(Key, 'index.yaml')]" > files.txt
+aws s3api list-objects --bucket $S3_BUCKET --query "Contents[?contains(Key, 'index.yaml')]" > files.txt
 
 INDEX_FILE=$(cat files.txt | awk "/Key/{print$1}" | awk -F":" '{print $2}' | awk -F"/" '{print $2}') 
 
