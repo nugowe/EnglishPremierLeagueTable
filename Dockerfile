@@ -19,4 +19,4 @@ RUN apt-get install -yq tzdata && \
     
 CMD ["/bin/bash"]
 
-ENTRYPOINT ["/opt/epl/scripts/build.sh"]
+ENTRYPOINT ["/opt/epl/build.sh"]
