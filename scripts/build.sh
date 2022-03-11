@@ -28,43 +28,42 @@ echo """
 
 aws s3 cp index.yaml s3://$S3_BUCKET/index/index.yaml
 
-
+aws s3://$S3_BUCKET/index/index.yaml index.yaml
 
 }
 
 
-aws s3api list-objects --bucket $S3_BUCKET --prefix 'index' --query 'Contents[].{Key: Key, Size: Size}' > files.json
+S3_PUBLISH () {
 
-echo files.json
-
-INDEX_FILE=$(cat files.json | jq '.[0].Size') 
-
-if [[ $INDEX_FILE == 0 ]]; then
-    INDEX_BUILD
-else 
-    echo "Index file present!"
-fi
-
-
-if [[ ! -e ./index.yaml ]]; then
-    CURRENT_TIME=$(date "+%Y.%m.%d-%H.%M.%S") 
-    aws s3 cp s3://$S3_BUCKET/index/index.yaml index.yaml
-    cat index.yaml | awk "/version/{print$2}" | awk -F":" '{print $2}' > index_observe.yaml
-    summation=1
-    old_index_value=$(cat index_observe.yaml)
-    sum=$(( $old_index_value + $summation ))
-    echo """
+CURRENT_TIME=$(date "+%Y.%m.%d-%H.%M.%S") 
+aws s3 cp s3://$S3_BUCKET/index/index.yaml index.yaml
+cat index.yaml | awk "/version/{print$2}" | awk -F":" '{print $2}' > index_observe.yaml
+summation=1
+    
+sum=$(( $old_index_value + $summation ))
+echo """
   epl-table_logs:
     version: $sum
       logfile-name: s3://$S3_BUCKET/index/$EPL_PNG_FILE 
         timestamp: $CURRENT_TIME
 
-  """ >> index.yaml
+""" >> index.yaml
 
-  echo "Performing a final transfer..."
-  aws s3 cp /opt/epl/scripts/$EPL_PNG_FILE s3://$S3_BUCKET/epl/$EPL_PNG_FILE && aws s3 cp /opt/epl/index.yaml s3://$S3_BUCKET/index/index.yaml
+echo "Performing a final transfer..."
+aws s3 cp /opt/epl/scripts/$EPL_PNG_FILE s3://$S3_BUCKET/epl/$EPL_PNG_FILE && aws s3 cp /opt/epl/index.yaml s3://$S3_BUCKET/index/index.yaml
 
+}
+
+
+aws s3api list-objects --bucket bucket-name --query "Contents[?contains(Key, 'index.yaml')]" > files.txt
+
+INDEX_FILE=$(cat files.txt | awk "/Key/{print$1}" | awk -F":" '{print $2}' | awk -F"/" '{print $2}') 
+
+
+if [[ -z $INDEX_FILE ]] || [[ $INDEX_FILE=="null" ]]; then
+  INDEX_BUILD && S3_PUBLISH
+else
+  S3_PUBLISH
 fi
-
-
+    
 
