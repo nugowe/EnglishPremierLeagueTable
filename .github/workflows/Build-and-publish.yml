@@ -26,7 +26,7 @@ jobs:
 
       - name: Publishing R code to s3
         env:
-          $S3_BUCKET: epltable
+          S3_BUCKET: epltable
           EPL_PNG_FILE: epltable.png
         run: |
           $GITHUB_WORKSPACE/scripts/build.sh
