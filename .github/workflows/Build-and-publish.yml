@@ -21,10 +21,7 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-2
       
-      env:
-        S3_BUCKET: epltable
-        EPL_PNG_FILE: epltable.png
-        AWS_DEFAULT_REGION: "us-east-1"
+    
       run: |
         $GITHUB_WORKSPACE/scripts/build.sh  
       
