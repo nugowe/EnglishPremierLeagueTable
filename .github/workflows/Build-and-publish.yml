@@ -1,28 +1,32 @@
-name: Deploy Build-and-publish
+name: Build-and-Publish-ecs-build
 
 on:
   push:
-    branches: [ EPL-modification ]
-    
+    # TODO: uncomment before merge
+    # branches: [main]
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+    # TODO: remove before merge
+    branches: [ ecs-build ]
+
+#branch
 
 jobs:
-  deploy:
+  publish:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: code checkout
-    - name: Configure AWS Credentials
-      uses: aws-actions/configure-aws-credentials@v1
-      with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: us-east-2
-      
-    
-      run: |
-        $GITHUB_WORKSPACE/scripts/build.sh  
-      
-  
+      - name: checkout repo
+        uses: actions/checkout@v2
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Publishing R code to s3
+        env:
+          $S3_BUCKET: epltable
+          EPL_PNG_FILE: epltable.png
+        run: |
+          $GITHUB_WORKSPACE/scripts/build.sh
