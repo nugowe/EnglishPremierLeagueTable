@@ -8,7 +8,7 @@ set -x
 
 sudo apt-get install -yq tzdata && sudo ln -fs /usr/share/zoneinfo/America/Chicago /etc/localtime && sudo dpkg-reconfigure -f noninteractive tzdata
 
-mkdir /tmp/R
+mkdir /tmp/R && touch ~/.Renviron
 
 echo"""
 
@@ -18,6 +18,9 @@ R_LIBS_USER="/tmp/R"
 
 sudo apt-get install r-base && chmod u+w /usr/local/lib/R/site-library
 
+echo "obtaining R directory"
+
+which R
 
 Rscript $GITHUB_WORKSPACE/scripts/EPLTable.R
 
@@ -36,7 +39,7 @@ echo """
 
 aws s3 cp index.yaml s3://$S3_BUCKET/index/index.yaml
 
-aws s3://$S3_BUCKET/index/index.yaml index.yaml
+aws cp s3://$S3_BUCKET/index/index.yaml index.yaml
 
 }
 

@@ -1,4 +1,6 @@
 
+Sys.getenv('RETICULATE_PYTHON')
+
 Rpackages=c("polite","rvest","kableExtra","gt","tidyverse")
 
 for (i in Rpackages){install.packages(i)} 
