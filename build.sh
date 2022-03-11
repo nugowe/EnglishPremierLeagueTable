@@ -5,7 +5,6 @@ set -x
 
 Rscript /opt/epl/scripts/EPLTable.R
 
-INDEX_BUILD (){
 
 CURRENT_TIME=$(date "+%Y.%m.%d-%H.%M.%S")    
 echo """
@@ -21,6 +20,5 @@ aws s3 cp index.yaml s3://$S3_BUCKET/index/index.yaml
 
 aws cp s3://$S3_BUCKET/index/index.yaml index.yaml
 
-}
 
-INDEX_BUILD
+
