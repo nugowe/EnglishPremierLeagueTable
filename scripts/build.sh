@@ -45,13 +45,13 @@ else
     echo """
   epl-table_logs:
     version: $sum
-      logfile-name: s3://$S3_BUCKET/index/$EPL_FILE
+      logfile-name: s3://$S3_BUCKET/index/$EPL_PNG_FILE 
         timestamp: $CURRENT_TIME
 
   """ > index.yaml
 
-
-  aws s3 cp $GITHUB_WORKSPACE/scripts/epltable.png s3://$S3_BUCKET/epl/epltable.png && aws s3 cp $GITHUB_WORKSPACE/index.yaml s3://$S3_BUCKET/index/index.yaml
+  echo "Performing a final transfer..."
+  aws s3 cp $GITHUB_WORKSPACE/scripts/epltable.png s3://$S3_BUCKET/epl/$EPL_PNG_FILE && aws s3 cp $GITHUB_WORKSPACE/index.yaml s3://$S3_BUCKET/index/index.yaml
 
 fi
 
