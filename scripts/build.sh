@@ -3,7 +3,7 @@
 set -x
 
 
-CURRENT_TIME=$(date "+%Y.%m.%d-%H.%M.%S")
+
 
 
 sudo apt-get install -yq tzdata && sudo ln -fs /usr/share/zoneinfo/America/Chicago /etc/localtime && dpkg-reconfigure -f noninteractive tzdata
@@ -43,7 +43,7 @@ fi
 
 
 if [[ $INDEX_FILE != 0 ]]; then
-
+    CURRENT_TIME=$(date "+%Y.%m.%d-%H.%M.%S") 
     aws s3 cp s3://$S3_BUCKET/index/index.yaml index.yaml
     cat index.yaml | awk "/version/{print$2}" | awk -F":" '{print $2}' > index_observe.yaml
     summation=1
