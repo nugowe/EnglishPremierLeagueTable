@@ -24,9 +24,11 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
-      - name: Publishing R code to s3
-        env:
-          S3_BUCKET: epltable
-          EPL_PNG_FILE: epltable.png
-        run: |
-          ./scripts/dockerbuild.sh
+      - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags: nosaugowe/epltable
+
+      
