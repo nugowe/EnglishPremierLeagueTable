@@ -50,7 +50,7 @@ echo """
 """ >> index.yaml
 
 echo "Performing a final transfer..."
-aws s3 cp /opt/epl/scripts/$EPL_PNG_FILE s3://$S3_BUCKET/epl/$EPL_PNG_FILE && aws s3 cp /opt/epl/index.yaml s3://$S3_BUCKET/index/index.yaml
+aws s3 cp $GITHUB_WORKSPACE/scripts/$EPL_PNG_FILE s3://$S3_BUCKET/epl/$EPL_PNG_FILE && aws s3 cp $GITHUB_WORKSPACE/index.yaml s3://$S3_BUCKET/index/index.yaml
 
 }
 
