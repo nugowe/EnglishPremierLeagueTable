@@ -8,6 +8,8 @@ set -x
 
 sudo apt-get install -yq tzdata && sudo ln -fs /usr/share/zoneinfo/America/Chicago /etc/localtime && sudo dpkg-reconfigure -f noninteractive tzdata
 
+sudo apt-get install r-base
+
 
 Rscript /opt/epl/scripts/EPLTable.R
 
@@ -24,9 +26,9 @@ echo """
 """ > index.yaml
 
 
-aws s3 cp /opt/epl/index.yaml s3://$S3_BUCKET/index/index.yaml
+aws s3 cp index.yaml s3://$S3_BUCKET/index/index.yaml
 
-rm -rf index.yaml
+
 
 }
 
@@ -39,10 +41,12 @@ INDEX_FILE=$(cat files.json | jq '.[0].Size')
 
 if [[ $INDEX_FILE == 0 ]]; then
     INDEX_BUILD
+else 
+    echo "Index file present!"
 fi
 
 
-if [[ $INDEX_FILE != 0 ]]; then
+if [[ -e ./index.yaml ]]; then
     CURRENT_TIME=$(date "+%Y.%m.%d-%H.%M.%S") 
     aws s3 cp s3://$S3_BUCKET/index/index.yaml index.yaml
     cat index.yaml | awk "/version/{print$2}" | awk -F":" '{print $2}' > index_observe.yaml
@@ -55,7 +59,7 @@ if [[ $INDEX_FILE != 0 ]]; then
       logfile-name: s3://$S3_BUCKET/index/$EPL_PNG_FILE 
         timestamp: $CURRENT_TIME
 
-  """ > index.yaml
+  """ >> index.yaml
 
   echo "Performing a final transfer..."
   aws s3 cp /opt/epl/scripts/epltable.png s3://$S3_BUCKET/epl/$EPL_PNG_FILE && aws s3 cp /opt/epl/index.yaml s3://$S3_BUCKET/index/index.yaml
