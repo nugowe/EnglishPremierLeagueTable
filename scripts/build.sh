@@ -11,7 +11,7 @@ sudo apt-get install -yq tzdata && sudo ln -fs /usr/share/zoneinfo/America/Chica
 sudo apt-get install r-base
 
 
-Rscript /opt/epl/scripts/EPLTable.R
+Rscript $GITHUB_WORKSPACE/scripts/EPLTable.R
 
 
 INDEX_BUILD (){
@@ -62,7 +62,7 @@ if [[ ! -e ./index.yaml ]]; then
   """ >> index.yaml
 
   echo "Performing a final transfer..."
-  aws s3 cp /opt/epl/scripts/epltable.png s3://$S3_BUCKET/epl/$EPL_PNG_FILE && aws s3 cp /opt/epl/index.yaml s3://$S3_BUCKET/index/index.yaml
+  aws s3 cp /opt/epl/scripts/$EPL_PNG_FILE s3://$S3_BUCKET/epl/$EPL_PNG_FILE && aws s3 cp /opt/epl/index.yaml s3://$S3_BUCKET/index/index.yaml
 
 fi
 
