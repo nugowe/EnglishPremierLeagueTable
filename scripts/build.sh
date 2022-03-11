@@ -8,6 +8,13 @@ set -x
 
 sudo apt-get install -yq tzdata && sudo ln -fs /usr/share/zoneinfo/America/Chicago /etc/localtime && sudo dpkg-reconfigure -f noninteractive tzdata
 
+mkdir /tmp/R
+
+echo"""
+
+R_LIBS_USER="/tmp/R"
+
+""" > ~/.Renviron
 
 sudo apt-get install r-base && chmod u+w /usr/local/lib/R/site-library
 
