@@ -21,3 +21,13 @@ jobs:
       run: |
         
         ./scripts/dockerbuild.sh
+
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+    - name: Copy EPLTable and index file to s3 Bucket
+      run: |
+         ./scripts/adhocTransfer.sh
