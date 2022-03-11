@@ -4,4 +4,4 @@ curl -fsSL https://get.docker.com -o get-docker.sh
 
 sh get-docker.sh
 
-docker build -t .
+docker build -t nosaugowe/epltable .
