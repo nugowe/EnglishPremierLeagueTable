@@ -27,8 +27,9 @@ jobs:
     - name: Docker build and push
       uses: docker/build-push-action@v2
       with:
-        push: true
+        push: false
         tags: nosaugowe/epl:latest
+        
 
     - name: Container run and Image Transfer
       uses: addnab/docker-run-action@v3
@@ -37,7 +38,7 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
         AWS_DEFAULT_REGION: us-east-1
       with:
-        image: epltable:latest
+        image: nosaugowe/epltable:latest
         shell: bash
         run: |
            docker cp $(cat /etc/hostname):/opt/epl/EPLTable.png /tmp
