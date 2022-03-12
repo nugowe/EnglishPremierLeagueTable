@@ -2,3 +2,4 @@
 
 docker build -t nosaugowe/epl .
 
+ls
