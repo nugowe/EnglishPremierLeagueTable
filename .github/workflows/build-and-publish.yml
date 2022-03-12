@@ -43,6 +43,10 @@ jobs:
         DockerStatus=$(cat test.txt | awk '{print$3}')
         S3_BUCKET="epltable"
         S3_SUBPATH="EPL"
+        echo "printing COntainer ID"
+        echo $CONTAINERID
+        echo "DockerStatus"
+        echo $DockerStatus
 
         
 
