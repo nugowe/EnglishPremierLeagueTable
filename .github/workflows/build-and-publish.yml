@@ -42,6 +42,9 @@ jobs:
         docker cp $(sudo docker ps -a | awk '{ print $1, $2 }' | grep  nosaugowe/epltable:latest | awk '{print $1 }'):/opt/epl/EPLTable.png /tmp
         echo "docker containers"
         docker ps -a
+        docker start $(sudo docker ps -a | awk '{ print $1, $2 }' | grep  nosaugowe/epltable:latest | awk '{print $1 }')
+        docker cp $(sudo docker ps -a | awk '{ print $1, $2 }' | grep  nosaugowe/epltable:latest | awk '{print $1 }'):/opt/epl/EPLTable.png /tmp
+        docker ps -a
 
         
         
