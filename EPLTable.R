@@ -1534,12 +1534,11 @@ gt(EPLTable) %>%
     source_note = md("*Source: Wikipedia*")
   )%>% tab_source_note(
     source_note = md(sprintf("Last successful Webscrape time was %s", WebscrapeTime ))
-  ) %>% gtsave("EPLTable.png", path = '/opt/epl/Desktop')
+  ) %>% gtsave("EPLTable.png", path = '/opt/epl/EPLTable.png')
 
 
 
-# put object with an upload progress bar
-put_object(tmp, object = "/opt/epl/EPLTable.png", bucket = "epltable", show_progress = TRUE)
+
 
 
 
