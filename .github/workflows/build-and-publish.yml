@@ -41,6 +41,9 @@ jobs:
         AWS_DEFAULT_REGION: us-west-2
       run: |
         docker pull nosaugowe/epltable:latest
+        CONTAINERID=$(docker run -d --name epltable nosaugowe/epltable:latest)
+        echo "Transferring EPlTable image to tmp folder"
+        
 
 
 
