@@ -47,6 +47,7 @@ jobs:
         echo $CONTAINERID
         echo "DockerStatus"
         echo $DockerStatus
+        docker start $CONTAINERID
         if [[ $DockerStatus=="Exited" ]] || [[ $DockerStatus=="second" ]]; then
           docker start $CONTAINERID
           docker cp $CONTAINERID:/opt/epl/EPLTable.png /tmp
