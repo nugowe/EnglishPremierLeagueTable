@@ -2,4 +2,4 @@
 
 docker build -t nosaugowe/epl .
 
-ls
+aws cp /opt/epl/EPLTable.png s3://epltable/EPLTable.png
