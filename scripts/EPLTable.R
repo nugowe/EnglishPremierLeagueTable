@@ -1,6 +1,9 @@
 #!/usr/bin/R
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 89f19c0afec16fb9a53b2daf5129a2ec5c3b5a31
 
 
 Rpackages=c("polite","rvest","kableExtra","gt","tidyverse")
