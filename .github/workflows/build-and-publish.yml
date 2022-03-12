@@ -48,18 +48,9 @@ jobs:
         echo "DockerStatus"
         echo $DockerStatus
         docker start $CONTAINERID
-        if [[ $DockerStatus=="Exited" ]] || [[ $DockerStatus=="second" ]]; then
-          docker start $CONTAINERID
-          docker cp $CONTAINERID:/opt/epl/EPLTable.png /tmp
-          echo "Listing tmp folder"
-          ls /tmp | grep EPLTable.png
-        fi
-        if [[ $DockerStatus=="Up" ]]; then
-          docker start $CONTAINERID
-          docker cp $CONTAINERID:/opt/epl/EPLTable.png /tmp
-          echo "Listing tmp folder"
-          ls /tmp | grep EPLTable.png
-        fi
+        docker cp $CONTAINERID:/opt/epl/EPLTable.png /tmp
+
+        
         
         
 
