@@ -43,6 +43,7 @@ jobs:
         docker pull nosaugowe/epltable:latest
         CONTAINERID=$(docker run -d --name epltable nosaugowe/epltable:latest)
         echo "Transferring EPlTable image to tmp folder"
+        docker cp $CONTANERID:/opt/epl/EPLTable.png /tmp
         
 
 
