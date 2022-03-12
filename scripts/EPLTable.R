@@ -1,9 +1,5 @@
 #!/usr/bin/R
 
-Sys.setenv("AWS_ACCESS_KEY_ID" = "AKIA5ZXNQDMYVBFPIAUK",
-           "AWS_SECRET_ACCESS_KEY" = "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",
-           "AWS_DEFAULT_REGION" = "us-east-1",
-           "AWS_SESSION_TOKEN" = "mytoken")
 
 
 Rpackages=c("polite","rvest","kableExtra","gt","tidyverse")
