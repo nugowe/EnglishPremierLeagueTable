@@ -19,4 +19,4 @@ RUN apt-get install -yq tzdata && \
     
 CMD ["/bin/bash"]
 
-ENTRYPOINT ["/opt/epl/scripts/dockerbuild.sh"]
+ENTRYPOINT ["/opt/epl/scripts/build.sh"]
