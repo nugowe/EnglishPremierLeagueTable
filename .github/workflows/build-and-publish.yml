@@ -50,7 +50,6 @@ jobs:
         if [[ $DockerStatus=="Exited" ]]; then
           sudo docker start $CONTAINERID
           sudo docker cp $CONTAINERID:/opt/epl/EPLTable.png /tmp
-          sudo docker cp $CONTAINERID:/opt/epl/EPLTable.png /tmp
           echo "Listing tmp folder"
           ls /tmp
         else
