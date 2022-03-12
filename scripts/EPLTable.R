@@ -1,12 +1,8 @@
 #!/usr/bin/R
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 89f19c0afec16fb9a53b2daf5129a2ec5c3b5a31
 
 
-Rpackages=c("polite","rvest","kableExtra","gt","tidyverse")
+Rpackages=c("polite","rvest","kableExtra","gt")
 
 for (i in Rpackages){install.packages(i)} 
 
@@ -1538,7 +1534,7 @@ gt(EPLTable) %>%
     source_note = md("*Source: Wikipedia*")
   )%>% tab_source_note(
     source_note = md(sprintf("Last successful Webscrape time was %s", WebscrapeTime ))
-  ) %>% gtsave("EPLTable.png", path = '/opt/epl/epltable.png')
+  ) %>% gtsave("EPLTable.png", path = '/opt/epl/EPLTable.png')
 
 
 
