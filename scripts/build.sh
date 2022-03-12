@@ -4,7 +4,7 @@ set -x
 
 echo "Running R script"
 
-Rscript /opt/epl/scripts/EPLTable.R 
+Rscript /opt/epl/EPLTable.R 
 
 
 
