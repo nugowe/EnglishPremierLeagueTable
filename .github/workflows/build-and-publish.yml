@@ -34,7 +34,11 @@ jobs:
         push: true
         tags: nosaugowe/epltable:latest
 
-  
+    - name: Docker Container creation & s3push
+        run: |
+          docker run -d --name epltable nosaugowe/epltable:latest
+          CONTAINERID=$(cat /etc/hostname)
+          echo $CONTAINERID
 
     
       
