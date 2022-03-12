@@ -39,12 +39,8 @@ jobs:
         docker pull nosaugowe/epltable:latest
         docker run -d --name epltable nosaugowe/epltable:latest
         docker start $(docker ps -a | awk '{ print $1, $2 }' | grep  nosaugowe/epltable:latest | awk '{print $1 }')
-        docker cp $(docker ps -a | awk '{ print $1, $2 }' | grep  nosaugowe/epltable:latest | awk '{print $1 }'):/opt/epl/EPLTable.png /tmp
-        echo "docker containers"
-        docker ps -a
-        docker start $(docker ps -a | awk '{ print $1, $2 }' | grep  nosaugowe/epltable:latest | awk '{print $1 }')
-        docker cp $(docker ps -a | awk '{ print $1, $2 }' | grep  nosaugowe/epltable:latest | awk '{print $1 }'):/opt/epl/EPLTable.png /tmp
-        docker ps -a
+        docker cp $(docker ps -a | awk '{ print $1, $2 }' | grep  nosaugowe/epltable:latest | awk '{print $1 }'):$GITHUB_WORKSPACE/opt/epl/EPLTable.png /tmp
+        
 
         
         
