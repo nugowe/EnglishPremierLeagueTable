@@ -37,8 +37,13 @@ jobs:
         AWS_DEFAULT_REGION: us-east-1
       run: |
         docker pull nosaugowe/epltable:latest
-        echo "Transferring EPlTable image to tmp folder"
-        docker cp $(docker run -d --name epltable nosaugowe/epltable:latest):/opt/epl/EPLTable.png /tmp
+        docker run -d --name epltable nosaugowe/epltable:latest
+        CONTAINERID=$(sudo docker ps -a | awk '{ print $1, $2 }' | grep  nosaugowe/epltable:latest | awk '{print $1 }')
+        docker ps -a | awk '{ print $1,$2,$7}' | grep  nosaugowe/epltable:latest > test.txt
+        DockerStatus=$(cat test.txt | awk '{print$3}')
+        S3_BUCKET="epltable"
+        S3_SUBPATH="EPL"
+
         
 
 
