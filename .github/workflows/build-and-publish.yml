@@ -13,11 +13,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: image build
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
-        AWS_DEFAULT_REGION: us-east-1
-        S3_BUCKET: epltable
+    
       run: |
         
         ./scripts/dockerbuild.sh 
@@ -33,4 +29,17 @@ jobs:
       with:
         push: true
         tags: nosaugowe/epl:latest
+
+    - name: Container run and Image Transfer
+      uses: addnab/docker-run-action@v3
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
+        AWS_DEFAULT_REGION: us-east-1
+      with:
+        image: epltable:latest
+        shell: bash
+        run: |
+           docker cp $(cat /etc/hostname):/opt/epl/EPLTable.png /tmp
+           aws s3 cp /tmp/EPLTable.png s3://epltable/EPLTable.png
    
