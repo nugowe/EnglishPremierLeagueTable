@@ -47,18 +47,18 @@ jobs:
         echo $CONTAINERID
         echo "DockerStatus"
         echo $DockerStatus
-        if [[ $DockerStatus=="Exited" ]]; then
-          sudo docker start $CONTAINERID
-          sudo docker cp $CONTAINERID:/opt/epl/EPLTable.png /tmp
+        if [[ $DockerStatus=="Exited" ]] || [[ $DockerStatus=="second" ]]; then
+          docker start $CONTAINERID
+          docker cp $CONTAINERID:/opt/epl/EPLTable.png /tmp
           echo "Listing tmp folder"
-          ls /tmp
-        else
-          echo "Runing the ImageTransfer...."
-          sudo docker cp $CONTAINERID:/opt/epl/EPLTable.png /tmp
-          echo "Listing tmp folder"
-          ls /tmp
+          ls /tmp | grep EPLTable.png
         fi
-
+        if [[ $DockerStatus=="Up" ]]; then
+          docker start $CONTAINERID
+          docker cp $CONTAINERID:/opt/epl/EPLTable.png /tmp
+          echo "Listing tmp folder"
+          ls /tmp | grep EPLTable.png
+        fi
         
         
 
