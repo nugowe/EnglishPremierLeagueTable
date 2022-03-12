@@ -1,3 +1,4 @@
+install.packages("aws.s3", repos = "https://cloud.R-project.org")
 
 Rpackages=c("polite","rvest","kableExtra","gt")
 
@@ -8,6 +9,7 @@ library(tidyverse)
 library(rvest)
 library(kableExtra)
 library(gt)
+library(aws.s3)
 
 webshot::install_phantomjs()
 
@@ -1532,10 +1534,12 @@ gt(EPLTable) %>%
     source_note = md("*Source: Wikipedia*")
   )%>% tab_source_note(
     source_note = md(sprintf("Last successful Webscrape time was %s", WebscrapeTime ))
-  ) %>% gtsave("EPLTable.png", path = '/opt/epl')
+  ) %>% gtsave("EPLTable.png", path = '/home/nosa2k/Desktop')
 
 
 
+# put object with an upload progress bar
+put_object(tmp, object = "/home/nosa2k/Desktop/EPLTable.png", bucket = "epltable", show_progress = TRUE)
 
 
 
