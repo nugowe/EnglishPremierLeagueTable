@@ -13,11 +13,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: image build
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
-        AWS_DEFAULT_REGION: us-west-2
-    
+       
       run: |
         echo "Running Docker build......."
         docker build -t nosaugowe/epltable .
@@ -38,12 +34,11 @@ jobs:
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
-        AWS_DEFAULT_REGION: us-west-2
+        AWS_DEFAULT_REGION: us-east-1
       run: |
         docker pull nosaugowe/epltable:latest
-        CONTAINERID=$(docker run -d --name epltable nosaugowe/epltable:latest)
         echo "Transferring EPlTable image to tmp folder"
-        docker cp $CONTANERID:/opt/epl/EPLTable.png /tmp
+        docker cp $(docker run -d --name epltable nosaugowe/epltable:latest):/opt/epl/EPLTable.png /tmp
         
 
 
