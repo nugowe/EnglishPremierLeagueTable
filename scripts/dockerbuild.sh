@@ -4,7 +4,7 @@ docker build -t nosaugowe/epl .
 
 CONTAINERID=$(cat /etc/hostname)
 
-docker run -d --name epltable nosaugowe/epltable
+docker run -d --name epltable nosaugowe/epl
 
-docker cp ${CONTAINERID}:/opt/crypto/scripts/epltable.png /tmp
+docker cp ${CONTAINERID}:/opt/crypto/scripts/EPLTable.png /tmp
 
