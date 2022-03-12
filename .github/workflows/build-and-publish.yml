@@ -34,26 +34,16 @@ jobs:
         push: true
         tags: nosaugowe/epltable:latest
 
-    
+    - name: Container run and build
+      uses: addnab/docker-run-action@v3
+      with:
+      username: ${{ secrets.DOCKER_USERNAME }}
+      password: ${{ secrets.DOCKER_PASSWORD }}
+      registry: docker.io
+      image: nosaugowe/epltable:latest
+      run: echo "hello world"
 
-    - name: docker container run & s3 push
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
-        AWS_DEFAULT_REGION: us-east-1
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_TOKEN }}
-
     
-      run: |
-    
-        CONTANINERID=$(docker run --rm -d --name epltable \
-       -e AWS_ACCESS_KEY_ID="${AWS_ACCESS_KEY_ID}" \
-       -e AWS_SECRET_ACCESS_KEY="${AWS_SECRET_ACCESS_KEY}" \
-       -e AWS_DEFAULT_REGION="${AWS_DEFAULT_REGION}" \
-       -e DOCKERHUB_TOKEN ="${DOCKERHUB_TOKEN}" \
-       -e DOCKERHUB_USERNAME="${DOCKERHUB_USERNAME}" \
-        nosaugowe/epltable:latest)
       
        
     
