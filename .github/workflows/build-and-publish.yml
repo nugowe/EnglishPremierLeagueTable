@@ -19,7 +19,7 @@ jobs:
         AWS_DEFAULT_REGION: us-west-2
     
       run: |
-        
+        echo "Running Docker build......."
         docker build -t nosaugowe/epltable .
 
     - name: Login to Docker Hub
