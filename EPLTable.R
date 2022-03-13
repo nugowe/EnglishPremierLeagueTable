@@ -1,6 +1,6 @@
 
 
-Rpackages=c("polite","rvest","kableExtra","gt","rcmdcheck")
+Rpackages=c("polite","rvest","kableExtra","gt")
 
 for (i in Rpackages){install.packages(i)}
 
@@ -9,8 +9,8 @@ library(tidyverse)
 library(rvest)
 library(kableExtra)
 library(gt)
-library(rcmdcheck)
-rcmdcheck("/opt/epl/EPLTable.R")
+#library(rcmdcheck)
+#rcmdcheck("/opt/epl/EPLTable.R")
 
 webshot::install_phantomjs()
 
