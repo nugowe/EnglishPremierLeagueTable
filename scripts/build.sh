@@ -6,6 +6,8 @@ echo "Running R script"
 
 Rscript /opt/epl/EPLTable.R 
 
+#creating s3 bucket if not inexistence
+aws s3api create-bucket --bucket $S3_BUCKET --region $AWS_DEFAULT_REGION --create-bucket-configuration LocationConstraint=$AWS_DEFAULT_REGION || true
 
 
 
@@ -48,6 +50,7 @@ aws s3 cp index.yaml s3://$S3_BUCKET/index/index.yaml
 
 }
 
+#checking if the an index file already exists
 aws s3api list-objects --bucket $S3_BUCKET --query "Contents[?contains(Key, 'index.yaml')]" > files.txt
 
 INDEX_FILE=$(cat files.txt | awk "/Key/{print$1}" | awk -F":" '{print $2}' | awk -F"/" '{print $2}') 
