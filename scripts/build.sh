@@ -23,7 +23,7 @@ echo """
 """ > index.yaml
 
 echo "Copying initial index file...................."
-aws s3 cp index.yaml s3://$S3_BUCKET/index/index.yaml
+#aws s3 cp index.yaml s3://$S3_BUCKET/index/index.yaml
 
 
 
@@ -59,13 +59,13 @@ INDEX_FILE=$(cat files.txt | awk "/Key/{print$1}" | awk -F":" '{print $2}' | awk
 if [[ $INDEX_FILE!="index.yaml" ]]; then
   INDEX_BUILD && PIPELINE_INDEX_ADD
   echo "Publishing the EPL Dashboard to s3........"
-  aws s3 sync ./$EPL_PNG_FILE s3://$S3_BUCKET/ --recursive
+  aws s3 sync ./$EPL_PNG_FILE s3://$S3_BUCKET/ 
 fi
 
 if [[ $INDEX_FILE=="index.yaml" ]]; then
   PIPELINE_INDEX_ADD
   echo "Publishing the EPL Dashboard to s3........"
-  aws s3 sync ./$EPL_PNG_FILE s3://$S3_BUCKET/ --recursive
+  aws s3 sync ./$EPL_PNG_FILE s3://$S3_BUCKET/ 
 
 fi
 
