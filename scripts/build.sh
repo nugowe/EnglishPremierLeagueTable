@@ -13,7 +13,7 @@ aws s3api create-bucket --bucket $S3_BUCKET --region $AWS_DEFAULT_REGION --creat
 
 INDEX_BUILD (){
 echo "Initializing the INDEX_BUILD Function........."
-CURRENT_TIME=$(date "+%Y.%m.%d-%H.%M.%S")    
+CURRENT_TIME=$(echo "$(date +'%Y-11-%d %H:%M:%S')")   
 echo """
   epl-table_logs:
     version: 1
@@ -32,7 +32,7 @@ aws s3 cp index.yaml s3://$S3_BUCKET/index/index.yaml
 
 PIPELINE_INDEX_ADD () {
 echo "Initializing the S3_PUBLISH Function........."
-CURRENT_TIME=$(date "+%Y.%m.%d-%H.%M.%S") 
+CURRENT_TIME=$(echo "$(date +'%Y-11-%d %H:%M:%S')")   
 aws s3 cp s3://$S3_BUCKET/index/index.yaml index.yaml
 tail -n 5 index.yaml | awk "/version/{print$2}" | awk -F":" '{print $2}' > index_observe.yaml
 summation=1
