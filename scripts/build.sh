@@ -28,13 +28,13 @@ aws s3 cp index.yaml s3://$S3_BUCKET/index/index.yaml
 }
 
 
-S3_PUBLISH () {
+PIPELINE_INDEX_ADD () {
 echo "Initializing the S3_PUBLISH Function........."
 CURRENT_TIME=$(date "+%Y.%m.%d-%H.%M.%S") 
 aws s3 cp s3://$S3_BUCKET/index/index.yaml index.yaml
 cat index.yaml | awk "/version/{print$2}" | awk -F":" '{print $2}' > index_observe.yaml
 summation=1
-    
+old_index_value=$(cat index_observe.yaml)    
 sum=$(( $old_index_value + $summation ))
 echo """
   epl-table_logs:
@@ -54,9 +54,9 @@ INDEX_FILE=$(cat files.txt | awk "/Key/{print$1}" | awk -F":" '{print $2}' | awk
 
 
 if [[ -z $INDEX_FILE ]] || [[ $INDEX_FILE=="null" ]]; then
-  INDEX_BUILD && S3_PUBLISH
+  INDEX_BUILD && PIPELINE_INDEX_ADD
 else
-  S3_PUBLISH
+  PIPELINE_INDEX_ADD
 fi
 
 
