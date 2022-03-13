@@ -1,16 +1,20 @@
 
 
-Rpackages=c("polite","rvest","kableExtra","gt")
+Rpackages=c("polite","rvest","kableExtra","gt","rcmdcheck")
 
 for (i in Rpackages){install.packages(i)}
+
 
 library(polite)
 library(tidyverse)
 library(rvest)
 library(kableExtra)
 library(gt)
-#library(rcmdcheck)
-#rcmdcheck("/opt/epl/EPLTable.R")
+library(rcmdcheck)
+
+#Running checks on Packages installed
+for (i in Rpackages){cran_check_results(i, flavours = cran_check_flavours(i), quiet = FALSE)}
+for (i in Rpackages){cran_check_flavours(i)}
 
 webshot::install_phantomjs()
 
