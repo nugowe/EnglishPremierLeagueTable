@@ -20,10 +20,10 @@ echo """
       logfile-name: s3://$S3_BUCKET/index/$EPL_FILE
         timestamp: $CURRENT_TIME
 
-""" > index.yaml
+""" > index_build.yaml
 
 echo "Copying initial index file...................."
-#aws s3 cp index.yaml s3://$S3_BUCKET/index/index.yaml
+aws s3 cp index_build.yaml s3://$S3_BUCKET/index/index.yaml
 
 
 
@@ -33,7 +33,7 @@ echo "Copying initial index file...................."
 PIPELINE_INDEX_ADD () {
 echo "Initializing the S3_PUBLISH Function........."
 CURRENT_TIME=$(echo "$(date +'%Y-11-%d %H:%M:%S')")   
-aws s3 cp s3://$S3_BUCKET/index/index.yaml index.yaml
+aws s3 cp s3://$S3_BUCKET/index/index.yaml index_pipeline_add.yaml
 tail -n 5 index.yaml | awk "/version/{print$2}" | awk -F":" '{print $2}' > index_observe.yaml
 summation=1
 old_index_value=$(cat index_observe.yaml)    
@@ -44,9 +44,9 @@ echo """
       logfile-name: s3://$S3_BUCKET/index/$EPL_PNG_FILE 
         timestamp: $CURRENT_TIME
 
-""" >> index.yaml
+""" >> index_pipeline_add.yaml
 
-aws s3 cp index.yaml s3://$S3_BUCKET/index/index.yaml
+aws s3 cp index_pipeline_add.yaml s3://$S3_BUCKET/index/index.yaml
 
 }
 
