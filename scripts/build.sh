@@ -6,7 +6,7 @@ echo "Running R script"
 
 Rscript /opt/epl/EPLTable.R 
 
-#creating s3 bucket if not inexistence
+#creating s3 bucket if not in existence
 aws s3api create-bucket --bucket $S3_BUCKET --region $AWS_DEFAULT_REGION --create-bucket-configuration LocationConstraint=$AWS_DEFAULT_REGION || true
 
 
