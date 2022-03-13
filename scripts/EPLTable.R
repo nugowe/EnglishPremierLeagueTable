@@ -13,7 +13,9 @@ library(kableExtra)
 library(gt)
 library(svglite)
 
-
+#Running checks on Packages installed
+for (i in Rpackages){cran_check_results(i, flavours = cran_check_flavours(i), quiet = FALSE)}
+for (i in Rpackages){cran_check_flavours(i)}
 
 url <- "https://en.wikipedia.org/wiki/2021%E2%80%9322_Premier_League"
 
