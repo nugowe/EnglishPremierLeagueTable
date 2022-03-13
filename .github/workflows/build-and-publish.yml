@@ -3,7 +3,9 @@ name: Deploy global-tools
 on:
   push:
     branches: [ main ]
-    
+  schedule:
+  - cron: "0 18 * * 0-6"
+  
   workflow_dispatch:
 
 
