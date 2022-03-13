@@ -53,7 +53,7 @@ aws s3api list-objects --bucket $S3_BUCKET --query "Contents[?contains(Key, 'ind
 INDEX_FILE=$(cat files.txt | awk "/Key/{print$1}" | awk -F":" '{print $2}' | awk -F"/" '{print $2}') 
 
 
-if [[ -z $INDEX_FILE ]] || [[ $INDEX_FILE=="null" ]]; then
+if [[ $INDEX_FILE!="index.yaml" ]] || [[ $INDEX_FILE=="null" ]]; then
   INDEX_BUILD && PIPELINE_INDEX_ADD
 else
   PIPELINE_INDEX_ADD

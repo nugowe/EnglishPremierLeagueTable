@@ -1,0 +1,13 @@
+[
+    {
+        "Key": "index/index.yaml",
+        "LastModified": "2022-03-13T13:57:41+00:00",
+        "ETag": "\"63d1505ec9a6252f518ce17ce37c783a\"",
+        "Size": 116,
+        "StorageClass": "STANDARD",
+        "Owner": {
+            "DisplayName": "nosa.ugowe",
+            "ID": "202a49a4dedcdd00171ee82ddaff02b45caf968c09d091bd391bbc105ddc023f"
+        }
+    }
+]
