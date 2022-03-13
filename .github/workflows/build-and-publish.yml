@@ -37,14 +37,12 @@ jobs:
         AWS_DEFAULT_REGION: us-east-1
       run: |
         docker pull nosaugowe/epltable:latest
-        docker run --rm --name epltable \
-       -e AWS_ACCESS_KEY_ID="${AWS_ACCESS_KEY_ID}" \
-       -e AWS_SECRET_ACCESS_KEY="${AWS_SECRET_ACCESS_KEY}" \
-       -e AWS_DEFAULT_REGION="${AWS_DEFAULT_REGION}" nosaugowe/epltable:latest
-
-
-
-
+        #CONTAINERID=$(sudo docker ps -a | awk '{ print $1, $2 }' | grep epltable | awk '{print $1 }')
+        docker run --rm -i \
+        -e AWS_ACCESS_KEY_ID="${AWS_ACCESS_KEY_ID}" \ 
+        -e AWS_SECRET_ACCESS_KEY="${AWS_SECRET_ACCESS_KEY}" \ 
+        -e AWS_DEFAULT_REGION="${AWS_DEFAULT_REGION}" \ 
+        nosaugowe/epltable:latest
 
         #docker commit $CONTAINERID nosaugowe/epltable2
         #docker cp $(docker run -d --name epltable3 nosaugowe/epltable2:latest):/opt/epl/EPLTable.png /tmp
