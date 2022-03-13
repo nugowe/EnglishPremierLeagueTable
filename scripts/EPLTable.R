@@ -2,7 +2,7 @@
 
 
 
-Rpackages=c("polite","rvest","kableExtra","gt")
+Rpackages=c("polite","rvest","kableExtra","gt","svglite")
 
 for (i in Rpackages){install.packages(i)} 
 
@@ -11,6 +11,7 @@ library(tidyverse)
 library(rvest)
 library(kableExtra)
 library(gt)
+library(svglite)
 
 
 
