@@ -38,7 +38,7 @@ jobs:
       run: |
         docker pull nosaugowe/epltable:latest
         #CONTAINERID=$(sudo docker ps -a | awk '{ print $1, $2 }' | grep epltable | awk '{print $1 }')
-        docker run -d --name epltable nosaugowe/epltable:latest
+        docker run --rm -it nosaugowe/epltable:latest
         #docker commit $CONTAINERID nosaugowe/epltable2
         #docker cp $(docker run -d --name epltable3 nosaugowe/epltable2:latest):/opt/epl/EPLTable.png /tmp
         #docker run -d --name epltable nosaugowe/epltable:latest
