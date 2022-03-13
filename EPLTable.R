@@ -1,4 +1,4 @@
-#!/usr/bin/R
+
 
 Rpackages=c("polite","rvest","kableExtra","gt","rcmdcheck")
 
