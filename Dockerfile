@@ -8,7 +8,8 @@ COPY . .
 
 RUN apt-get update && apt-get install -yq \
   curl \
-  apt-utils 
+  apt-utils \
+  awscli 
 
 
 RUN apt-get install -yq tzdata && \
