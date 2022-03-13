@@ -56,14 +56,16 @@ aws s3api list-objects --bucket $S3_BUCKET --query "Contents[?contains(Key, 'ind
 INDEX_FILE=$(cat files.txt | awk "/Key/{print$1}" | awk -F":" '{print $2}' | awk -F"/" '{print $2}') 
 
 
-if [[ $INDEX_FILE!="index.yaml" ]] || [[ $INDEX_FILE=="null" ]]; then
+if [[ $INDEX_FILE!="index.yaml" ]]; then
   INDEX_BUILD && PIPELINE_INDEX_ADD
   echo "Publishing the EPL Dashboard to s3........"
-  aws s3 cp ./EPLTable.png s3://epltable/ --recursive
-else
+  aws s3 cp ./$EPL_PNG_FILE s3://$S3_BUCKET/ --recursive
+fi
+
+if [[ $INDEX_FILE=="index.yaml" ]]; then
   PIPELINE_INDEX_ADD
   echo "Publishing the EPL Dashboard to s3........"
-  aws s3 cp ./EPLTable.png s3://epltable/ --recursive
+  aws s3 cp ./$EPL_PNG_FILE s3://$S3_BUCKET/ --recursive
 
 fi
 
