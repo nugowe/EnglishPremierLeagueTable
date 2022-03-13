@@ -1,6 +1,6 @@
-install.packages("aws.s3", repos = "https://cloud.R-project.org")
+#!/usr/bin/R
 
-Rpackages=c("polite","rvest","kableExtra","gt")
+Rpackages=c("polite","rvest","kableExtra","gt","rcmdcheck")
 
 for (i in Rpackages){install.packages(i)}
 
@@ -9,7 +9,8 @@ library(tidyverse)
 library(rvest)
 library(kableExtra)
 library(gt)
-library(aws.s3)
+library(rcmdcheck)
+rcmdcheck("/opt/epl/EPLTable.R")
 
 webshot::install_phantomjs()
 
