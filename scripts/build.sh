@@ -34,7 +34,7 @@ PIPELINE_INDEX_ADD () {
 echo "Initializing the S3_PUBLISH Function........."
 CURRENT_TIME=$(echo "$(date +'%Y-11-%d %H:%M:%S')")   
 aws s3 cp s3://$S3_BUCKET/index/index.yaml index_pipeline_add.yaml
-tail -n 5 index.yaml | awk "/version/{print$2}" | awk -F":" '{print $2}' > index_observe.yaml
+tail -n 5 index_pipeline_add.yaml | awk "/version/{print$2}" | awk -F":" '{print $2}' > index_observe.yaml
 summation=1
 old_index_value=$(cat index_observe.yaml)    
 sum=$(( $old_index_value + $summation ))
