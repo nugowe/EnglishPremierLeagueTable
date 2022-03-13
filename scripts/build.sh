@@ -10,7 +10,7 @@ Rscript /opt/epl/EPLTable.R
 
 
 INDEX_BUILD (){
-
+echo "Initializing the INDEX_BUILD Function........."
 CURRENT_TIME=$(date "+%Y.%m.%d-%H.%M.%S")    
 echo """
   epl-table_logs:
@@ -20,7 +20,7 @@ echo """
 
 """ > index.yaml
 
-
+echo "Copying initial index file...................."
 aws s3 cp index.yaml s3://$S3_BUCKET/index/index.yaml
 
 
@@ -29,7 +29,7 @@ aws s3 cp index.yaml s3://$S3_BUCKET/index/index.yaml
 
 
 S3_PUBLISH () {
-
+echo "Initializing the S3_PUBLISH Function........."
 CURRENT_TIME=$(date "+%Y.%m.%d-%H.%M.%S") 
 aws s3 cp s3://$S3_BUCKET/index/index.yaml index.yaml
 cat index.yaml | awk "/version/{print$2}" | awk -F":" '{print $2}' > index_observe.yaml
@@ -59,6 +59,8 @@ else
   S3_PUBLISH
 fi
 
+
+echo "Publishing the EPL Picture to s3........"
 
 aws s3 cp ./EPLTable.png s3://epltable/ --recursive
 
