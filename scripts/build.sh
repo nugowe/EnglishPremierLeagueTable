@@ -55,12 +55,15 @@ INDEX_FILE=$(cat files.txt | awk "/Key/{print$1}" | awk -F":" '{print $2}' | awk
 
 if [[ $INDEX_FILE!="index.yaml" ]] || [[ $INDEX_FILE=="null" ]]; then
   INDEX_BUILD && PIPELINE_INDEX_ADD
+  echo "Publishing the EPL Dashboard to s3........"
+  aws s3 cp ./EPLTable.png s3://epltable/ --recursive
 else
   PIPELINE_INDEX_ADD
+  echo "Publishing the EPL Dashboard to s3........"
+  aws s3 cp ./EPLTable.png s3://epltable/ --recursive
+
 fi
 
 
-echo "Publishing the EPL Dashboard to s3........"
 
-aws s3 cp ./EPLTable.png s3://epltable/ --recursive
 
