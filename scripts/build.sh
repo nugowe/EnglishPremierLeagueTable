@@ -60,7 +60,7 @@ else
 fi
 
 
-echo "Publishing the EPL Picture to s3........"
+echo "Publishing the EPL Dashboard to s3........"
 
 aws s3 cp ./EPLTable.png s3://epltable/ --recursive
 
