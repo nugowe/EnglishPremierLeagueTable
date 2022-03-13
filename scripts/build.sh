@@ -44,7 +44,7 @@ echo """
 
 """ >> index.yaml
 
-
+aws s3 cp index.yaml s3://$S3_BUCKET/index/index.yaml
 
 }
 
