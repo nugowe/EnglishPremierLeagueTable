@@ -13,10 +13,10 @@ aws s3api create-bucket --bucket $S3_BUCKET --region $AWS_DEFAULT_REGION --creat
 #checking if the an index file already exists
 aws s3api list-objects --bucket $S3_BUCKET --query "Contents[?contains(Key, 'index.yaml')]" > files.txt
 
-INDEX_FILE=$(cat files.txt | awk "/Key/{print$1}" | awk -F":" '{print $2}' | awk -F"/" '{print $2}') 
+#INDEX_FILE=$(cat files.txt | awk "/Key/{print$1}" | awk -F":" '{print $2}' | awk -F"/" '{print $2}') 
 
 
-if [[ $INDEX_FILE!="index.yaml" ]]; then
+if [[ $(cat files.txt | awk "/Key/{print$1}" | awk -F":" '{print $2}' | awk -F"/" '{print $2}')!="index.yaml" ]]; then
     echo "Initializing the INDEX_BUILD Function........."
     CURRENT_TIME=$(echo "$(date +'%Y-11-%d %H:%M:%S')")   
     echo """
@@ -50,7 +50,7 @@ if [[ $INDEX_FILE!="index.yaml" ]]; then
  
 fi
 
-if [[ $INDEX_FILE=="index.yaml" ]]; then
+if [[ $(cat files.txt | awk "/Key/{print$1}" | awk -F":" '{print $2}' | awk -F"/" '{print $2}')=="index.yaml" ]]; then
     echo "Initializing the index sum Function........."
     CURRENT_TIME=$(echo "$(date +'%Y-11-%d %H:%M:%S')")   
     aws s3 cp s3://$S3_BUCKET/index/index.yaml index_pipeline_add.yaml
