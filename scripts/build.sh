@@ -47,6 +47,8 @@ if [[ $(cat files.txt | awk "/Key/{print$1}" | awk -F":" '{print $2}' | awk -F"/
     """ >> index_pipeline_add.yaml
 
     aws s3 cp index_pipeline_add.yaml s3://$S3_BUCKET/index/index.yaml
+
+    aws s3 sync ./$EPL_PNG_FILE s3://$S3_BUCKET/$EPL_PNG_FILE
  
 fi
 
@@ -67,6 +69,7 @@ if [[ $(cat files.txt | awk "/Key/{print$1}" | awk -F":" '{print $2}' | awk -F"/
     """ >> index_pipeline_add.yaml
 
     aws s3 cp index_pipeline_add.yaml s3://$S3_BUCKET/index/index.yaml
+    aws s3 sync ./$EPL_PNG_FILE s3://$S3_BUCKET/$EPL_PNG_FILE
 
 fi
 
