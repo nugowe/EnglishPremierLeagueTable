@@ -8,4 +8,4 @@ TODO:
 
 ![Screenshot from 2021-10-08 18-26-42](https://user-images.githubusercontent.com/25004712/136635661-0810a46c-611c-4655-9770-89a047b93841.png)
 
-![Screenshot from 2022-03-14 12-52-34](https://user-images.githubusercontent.com/25004712/158232002-d6e3cc8d-3e98-46ca-8bd2-a700db34d76a.png)
+![Screenshot from 2022-03-14 13-20-12](https://user-images.githubusercontent.com/25004712/158236147-845f5c6b-e715-40bd-9c22-192a483e5de9.png)
