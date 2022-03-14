@@ -1,4 +1,4 @@
-name: Deploy global-tools
+name: Deploy EnglishPremierLeagueTable
 
 on:
   push:
