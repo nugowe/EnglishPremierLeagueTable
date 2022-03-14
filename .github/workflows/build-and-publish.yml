@@ -5,7 +5,9 @@ on:
     branches: [ main ]
   schedule:
   - cron: "0 18 * * 0-6"
+  on:
   repository_dispatch:
+    types: [EPLApiCall]
   
   workflow_dispatch:
 
