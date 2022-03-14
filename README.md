@@ -1,8 +1,8 @@
 # This is an automated table that scrapes updated League results from wikipedia and populates the table accordingly. 
 
 TODO:
-1) Github Actions to automate the scraping and production of the final artifact.
-2) Containerization of the Table Content
+1) Github Actions to automate the scraping and production of the final artifact. -- Done
+2) Containerization of the Table Content -- Done
 3) Kubernetes Container orchestration and TLS Binding on an nginx Load Balancer.
 4) Automated Table Delivery using R's Blastula Package
 
