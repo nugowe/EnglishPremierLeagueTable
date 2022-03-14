@@ -14,7 +14,7 @@ library(rcmdcheck)
 
 #Running checks on Packages installed
 for (i in Rpackages){cran_check_results(i, flavours = cran_check_flavours(i), quiet = FALSE)}
-for (i in Rpackages){cran_check_flavours(i)}
+
 
 webshot::install_phantomjs()
 
