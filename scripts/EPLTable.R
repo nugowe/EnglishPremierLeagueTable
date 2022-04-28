@@ -278,7 +278,7 @@ gt(EPLTable) %>%
     source_note = md("*Source: Wikipedia*")
   )%>% tab_source_note(
     source_note = md(sprintf("Last successful Webscrape time was %s", WebscrapeTime ))
-  ) %>% gtsave("EPLTable.png", path = '/opl/epl/EPLTable.png')
+  ) %>% gtsave("EPLTable.png", path = "/home/nosa2k/Desktop/EPLTable.png")
 
 
 
