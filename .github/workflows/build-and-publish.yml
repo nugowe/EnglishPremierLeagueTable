@@ -3,8 +3,8 @@ name: Deploy EnglishPremierLeagueTable
 on:
   push:
     branches: [ main ]
-  #schedule:
-  #- cron: '0 18 * * 0-6'
+  schedule:
+  - cron: '0 18 * * 0-6'
 
   repository_dispatch:
     types: [EPLApiCall]
