@@ -4,7 +4,7 @@ set -e
 
 echo "Running R script"
 
-Rscript /opt/epl/EPLTable.R 
+Rscript /opt/epl/scripts/EPLTable.R 
 
 #echo "Transferring EPLDashboard to s3.........."
 
