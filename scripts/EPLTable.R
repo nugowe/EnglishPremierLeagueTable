@@ -24,7 +24,7 @@ url <- "https://en.wikipedia.org/wiki/2021%E2%80%9322_Premier_League"
 
 session = bow(user_agent = "EPL-Table-Scrape", url)
 
-EPLTable <- scrape(session) %>% html_nodes("table.wikitable:nth-child(29)") %>% html_table()
+EPLTable <- scrape(session) %>% html_nodes("table.wikitable:nth-child(56)") %>% html_table()
 
 WebscrapeTime <- format(Sys.time(), "%A %B %Y, %H:%M:%S (CST)")
 
@@ -71,16 +71,16 @@ for(k in 1:20){
 
 for(i in EPLTable$Team[k]){
   
-  if(i == "Chelsea (X)"){
+  if(i == "Chelsea"){
     logolist <- append(logolist, logos[1])
     
-  }else if(i == "Liverpool (Q)"){
+  }else if(i == "Liverpool"){
     
     logolist <- append(logolist, logos[2])
-  }else if(i == "Manchester City (Q)"){
+  }else if(i == "Manchester City"){
     
     logolist <- append(logolist, logos[3])
-  }else if(i == "Manchester United (Y)"){
+  }else if(i == "Manchester United"){
     
     logolist <- append(logolist, logos[4])
   }else if(i == "Everton"){
@@ -101,7 +101,7 @@ for(i in EPLTable$Team[k]){
   }else if(i == "Aston Villa"    ){
     
     logolist <- append(logolist, logos[10])
-  }else if(i == "Arsenal (X)"  ){
+  }else if(i == "Arsenal"  ){
     
     logolist <- append(logolist, logos[11])
   }else if(i == "Wolverhampton Wanderers"){
@@ -280,7 +280,7 @@ gt(EPLTable) %>%
     source_note = md("*Source: Wikipedia*")
   )%>% tab_source_note(
     source_note = md(sprintf("Last successful Webscrape time was %s", WebscrapeTime ))
-  ) %>% gtsave(filename = "EPLTable.png", path = "/EPLTable.png")
+  ) %>% gtsave(filename = "EPLTable.html")
 
 
 
