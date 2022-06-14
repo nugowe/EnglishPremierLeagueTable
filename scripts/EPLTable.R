@@ -2,7 +2,7 @@
 
 # Loading the necessary R packages
 
-Rpackages=c("polite","rvest","kableExtra","gt","svglite")
+#Rpackages=c("polite","rvest","kableExtra","gt","svglite")
 
 for (i in Rpackages){install.packages(i)} 
 
@@ -122,7 +122,7 @@ for(i in EPLTable$Team[k]){
   }else if(i == "Southampton"  ){
     
     logolist <- append(logolist, logos[17])
-  }else if(i == "Burnley" ){
+  }else if(i == "Burnley (R)" ){
     
     logolist <- append(logolist, logos[18])
   }else if(i == "Newcastle United"  ){
