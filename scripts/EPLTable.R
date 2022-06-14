@@ -92,7 +92,7 @@ for(i in EPLTable$Team[k]){
   }else if(i == "Brentford"){
     
     logolist <- append(logolist, logos[7])
-  }else if(i == "Tottenham Hotspur (X)"  ){
+  }else if(i == "Tottenham Hotspur"  ){
     
     logolist <- append(logolist, logos[8])
   }else if(i == "West Ham United"   ){
