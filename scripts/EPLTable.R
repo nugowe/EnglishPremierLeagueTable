@@ -283,4 +283,11 @@ gt(EPLTable) %>%
     source_note = md("*Source: Wikipedia & The English Premier League (Official Website)*")
   )%>% tab_source_note(
     source_note = md(sprintf("Last successful Webscrape time was %s", WebscrapeTime ))
-  )  %>% gtsave(filename = "EPLTable.html")
+  )  %>% opt_css(
+    css = "
+      .topstrikerflags {
+      border-radius: 80%
+    }
+    "
+  ) %>% gtsave(filename = "EPLTable.html")
+
