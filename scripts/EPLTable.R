@@ -76,7 +76,7 @@ for(k in 1:20){
     }else if(i == "Manchester City"){
       
       logolist <- append(logolist, logos[3])
-    }else if(i == "Manchester United"){
+    }else if(i == "Manchester United (Y)"){
       
       logolist <- append(logolist, logos[4])
     }else if(i == "Everton"){
@@ -144,7 +144,7 @@ gt(EPLTable) %>%
     <img src='https://upload.wikimedia.org/wikipedia/commons/d/d9/Flag_of_Norway.svg' class='topstrikerflag' style='height:70px;' 
     <br></br>
     <i style='font-family: Lato'; font-size:60px><strong>  TOP GOAL SCORER</strong></i>
-    <i style='font-family: Lato'; font-size:60px> | <strong>ERLING HAALAND</strong> | <strong>26 GOALS</strong>
+    <i style='font-family: Lato'; font-size:60px> | <strong>ERLING HAALAND</strong> | <strong>28 GOALS</strong>
     <p style='font-family: Roboto; font-size: 20px; background-color: #B3C7D6FF; color:black; font-weight:bold; font-style:italic'>English Premier League | Table Standings for the 2022/2023 Season</p>
     </div>
                     
