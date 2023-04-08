@@ -2,9 +2,9 @@
 
 # Loading the necessary R packages
 
-Rpackages=c("polite","rvest","kableExtra","gt","svglite")
+#Rpackages=c("polite","rvest","kableExtra","gt","svglite")
 
-for (i in Rpackages){install.packages(i)} 
+#for (i in Rpackages){install.packages(i)} 
 
 library(polite)
 library(tidyverse)
@@ -20,7 +20,7 @@ url <- "https://en.wikipedia.org/wiki/2022%E2%80%9323_Premier_League"
 
 session = bow(user_agent = "EPL-Table-Scrape", url)
 
-EPLTable <- scrape(session) %>% html_nodes("table.wikitable:nth-child(32)") %>% html_table()
+EPLTable <- scrape(session) %>% html_nodes("table.wikitable:nth-child(34)") %>% html_table()
 
 EPLTable <- as.data.frame(EPLTable)
 
@@ -141,7 +141,7 @@ gt(EPLTable) %>%
     subtitle = html("<div style='background-color:#FCF6F5FF'>
     <img src='https://resources.premierleague.com/premierleague/photos/players/250x250/p223094.png' class='topstriker' style='height:90px;' 
     <div>
-    <img src='https://upload.wikimedia.org/wikipedia/commons/d/d9/Flag_of_Norway.svg' class='topstrikerflag' style='height:70px;' 
+    <img src='https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg' class='topstrikerflag' style='height:70px;' 
     <br></br>
     <i style='font-family: Lato'; font-size:60px><strong>  TOP GOAL SCORER</strong></i>
     <i style='font-family: Lato'; font-size:60px> | <strong>ERLING HAALAND</strong> | <strong>28 GOALS</strong>
