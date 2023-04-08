@@ -2,9 +2,9 @@
 
 # Loading the necessary R packages
 
-#Rpackages=c("polite","rvest","kableExtra","gt","svglite")
+Rpackages=c("polite","rvest","kableExtra","gt","svglite")
 
-#for (i in Rpackages){install.packages(i)} 
+for (i in Rpackages){install.packages(i)} 
 
 library(polite)
 library(tidyverse)
