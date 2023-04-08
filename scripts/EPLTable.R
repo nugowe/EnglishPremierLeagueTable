@@ -207,7 +207,7 @@ gt(EPLTable) %>%
   ) %>% data_color(
     
     columns = "D",
-    colors = scales::col_numeric("#CED2CC", n = 2 , domain = NULL),
+    colors = scales::col_numeric("#CD5C5C", n = 2 , domain = NULL),
     alpha = NULL,
     apply_to = c("fill", "text"),
     autocolor_text = TRUE
