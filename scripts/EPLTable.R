@@ -144,7 +144,7 @@ gt(EPLTable) %>%
     <img src='https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg' class='topstrikerflag' style='height:100px;' 
     <br></br>
     <i style='font-family: Lato'; font-size:70px><strong>  TOP GOAL SCORER</strong></i>
-    <i style='font-family: Lato'; font-size:70px> | <strong>ERLING HAALAND</strong> | <strong>30 GOALS</strong>
+    <i style='font-family: Lato'; font-size:70px> | <strong>ERLING HAALAND</strong> | <strong>32 GOALS</strong>
     <p style='font-family: Roboto; font-size: 20px; background-color: #B3C7D6FF; color:black; font-weight:bold; font-style:italic'>English Premier League | Table Standings for the 2022/2023 Season</p>
     </div>
                     
