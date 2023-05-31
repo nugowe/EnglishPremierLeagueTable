@@ -2,9 +2,9 @@
 
 # Loading the necessary R packages
 
-Rpackages=c("polite","rvest","kableExtra","gt","svglite")
+#Rpackages=c("polite","rvest","kableExtra","gt","svglite")
 
-for (i in Rpackages){install.packages(i)} 
+#for (i in Rpackages){install.packages(i)} 
 
 library(polite)
 library(tidyverse)
@@ -20,7 +20,7 @@ url <- "https://en.wikipedia.org/wiki/2022%E2%80%9323_Premier_League"
 
 session = bow(user_agent = "EPL-Table-Scrape", url)
 
-EPLTable <- scrape(session) %>% html_nodes("table.wikitable:nth-child(34)") %>% html_table()
+EPLTable <- scrape(session) %>% html_nodes("table.wikitable:nth-child(47)") %>% html_table()
 
 EPLTable <- as.data.frame(EPLTable)
 
@@ -73,10 +73,10 @@ for(k in 1:20){
     }else if(i == "Liverpool"){
       
       logolist <- append(logolist, logos[2])
-    }else if(i == "Manchester City"){
+    }else if(i == "Manchester City (C)"){
       
       logolist <- append(logolist, logos[3])
-    }else if(i == "Manchester United (Y)"){
+    }else if(i == "Manchester United"){
       
       logolist <- append(logolist, logos[4])
     }else if(i == "Everton"){
@@ -91,7 +91,7 @@ for(k in 1:20){
     }else if(i == "Tottenham Hotspur"  ){
       
       logolist <- append(logolist, logos[8])
-    }else if(i == "West Ham United"   ){
+    }else if(i == "West Ham United (Z)"   ){
       
       logolist <- append(logolist, logos[9])
     }else if(i == "Aston Villa"    ){
@@ -103,7 +103,7 @@ for(k in 1:20){
     }else if(i == "Wolverhampton Wanderers"){
       
       logolist <- append(logolist, logos[12])
-    }else if(i == "Leicester City" ){
+    }else if(i == "Leicester City (R)" ){
       
       logolist <- append(logolist, logos[13])
     }else if(i == "Crystal Palace"){
@@ -112,10 +112,10 @@ for(k in 1:20){
     }else if(i == "Fulham"){
       
       logolist <- append(logolist, logos[15])
-    }else if(i == "Leeds United" ){
+    }else if(i == "Leeds United (R)" ){
       
       logolist <- append(logolist, logos[16])
-    }else if(i == "Southampton"  ){
+    }else if(i == "Southampton (R)"  ){
       
       logolist <- append(logolist, logos[17])
     }else if(i == "Bournemouth" ){
@@ -144,7 +144,7 @@ gt(EPLTable) %>%
     <img src='https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg' class='topstrikerflag' style='height:100px;' 
     <br></br>
     <i style='font-family: Lato'; font-size:70px><strong>  TOP GOAL SCORER</strong></i>
-    <i style='font-family: Lato'; font-size:70px> | <strong>ERLING HAALAND</strong> | <strong>32 GOALS</strong>
+    <i style='font-family: Lato'; font-size:70px> | <strong>ERLING HAALAND</strong> | <strong>36 GOALS</strong>
     <p style='font-family: Roboto; font-size: 20px; background-color: #B3C7D6FF; color:black; font-weight:bold; font-style:italic'>English Premier League | Table Standings for the 2022/2023 Season</p>
     </div>
                     
@@ -290,4 +290,3 @@ gt(EPLTable) %>%
     }
     "
   ) %>% gtsave(filename = "EPLTable.html")
-
