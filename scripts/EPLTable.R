@@ -4,7 +4,7 @@
 
 Rpackages=c("polite","rvest","kableExtra","gt","svglite")
 
-for (i in Rpackages){install.packages(i)} 
+for (packages in Rpackages){install.packages(packages)} 
 
 library(polite)
 library(tidyverse)
@@ -20,7 +20,7 @@ url <- "https://en.wikipedia.org/wiki/2022%E2%80%9323_Premier_League"
 
 session = bow(user_agent = "EPL-Table-Scrape", url)
 
-EPLTable <- scrape(session) %>% html_nodes("table.wikitable:nth-child(47)") %>% html_table()
+EPLTable <- scrape(session) %>% html_nodes("table.wikitable:nth-child(44)") %>% html_table()
 
 EPLTable <- as.data.frame(EPLTable)
 
