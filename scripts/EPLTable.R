@@ -36,6 +36,8 @@ names(EPLTable)[12] <- "Qualification/Regulation"
 
 names(EPLTable)[11] <- "Pts"
 
+EPLTable$Team <- unlist(strsplit(EPLTable$Team, " \\(.*\\)"))
+
 Chelsealogo <- "https://upload.wikimedia.org/wikipedia/en/c/cc/Chelsea_FC.svg"
 Liverpoollogo <- "https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg"
 ManchesterCitylogo <- "https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg"
@@ -73,7 +75,7 @@ for(k in 1:20){
     }else if(i == "Liverpool"){
       
       logolist <- append(logolist, logos[2])
-    }else if(i == "Manchester City (C)"){
+    }else if(i == "Manchester City"){
       
       logolist <- append(logolist, logos[3])
     }else if(i == "Manchester United"){
@@ -91,7 +93,7 @@ for(k in 1:20){
     }else if(i == "Tottenham Hotspur"  ){
       
       logolist <- append(logolist, logos[8])
-    }else if(i == "West Ham United (Z)"   ){
+    }else if(i == "West Ham United"   ){
       
       logolist <- append(logolist, logos[9])
     }else if(i == "Aston Villa"    ){
@@ -112,10 +114,10 @@ for(k in 1:20){
     }else if(i == "Fulham"){
       
       logolist <- append(logolist, logos[15])
-    }else if(i == "Leeds United (R)" ){
+    }else if(i == "Leeds United" ){
       
       logolist <- append(logolist, logos[16])
-    }else if(i == "Southampton (R)"  ){
+    }else if(i == "Southampton"  ){
       
       logolist <- append(logolist, logos[17])
     }else if(i == "Bournemouth" ){
