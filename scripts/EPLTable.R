@@ -4,7 +4,7 @@
 
 Rpackages=c("polite","rvest","kableExtra","gt","svglite")
 
-for (packages in Rpackages){install.packages(packages)} 
+#for (packages in Rpackages){install.packages(packages)} 
 
 library(polite)
 library(tidyverse)
@@ -20,7 +20,7 @@ url <- "https://en.wikipedia.org/wiki/2022%E2%80%9323_Premier_League"
 
 session = bow(user_agent = "EPL-Table-Scrape", url)
 
-EPLTable <- scrape(session) %>% html_nodes("table.wikitable:nth-child(44)") %>% html_table()
+EPLTable <- scrape(session) %>% html_nodes("table.wikitable:nth-child(47)") %>% html_table()
 
 EPLTable <- as.data.frame(EPLTable)
 
@@ -105,7 +105,7 @@ for(k in 1:20){
     }else if(i == "Wolverhampton Wanderers"){
       
       logolist <- append(logolist, logos[12])
-    }else if(i == "Leicester City (R)" ){
+    }else if(i == "Leicester City" ){
       
       logolist <- append(logolist, logos[13])
     }else if(i == "Crystal Palace"){
@@ -186,12 +186,8 @@ gt(EPLTable) %>%
       google_font(name = "Roboto Condensed")
     )
   ) %>% data_color(
-    
+    palette = "Reds",
     columns = "Qualification/Regulation",
-    colors = scales::col_factor("Reds", n = 1 , domain = NULL),
-    alpha = NULL,
-    apply_to = c("fill", "text"),
-    autocolor_text = TRUE
   )%>%  data_color(
     
     columns = "Pld",
