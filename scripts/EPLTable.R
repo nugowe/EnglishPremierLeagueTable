@@ -4,7 +4,7 @@
 
 Rpackages=c("polite","rvest","kableExtra","gt","svglite")
 
-#for (packages in Rpackages){install.packages(packages)} 
+for (packages in Rpackages){install.packages(packages)} 
 
 library(polite)
 library(tidyverse)
@@ -187,7 +187,7 @@ gt(EPLTable) %>%
     )
   ) %>% data_color(
     palette = "Reds",
-    columns = "Qualification/Regulation",
+    columns = "Qualification/Regulation"
   )%>%  data_color(
     
     columns = "Pld",
