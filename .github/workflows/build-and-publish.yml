@@ -13,7 +13,7 @@ on:
 
 
 jobs:
-  deploy:
+  EPLTable_Deployment:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -45,7 +45,10 @@ jobs:
         #echo "Running the Docker Container........."
         #docker run --rm --name epltable -e EPL_PNG_FILE="${EPL_PNG_FILE}" -e S3_BUCKET="${S3_BUCKET}" -e AWS_ACCESS_KEY_ID="${AWS_ACCESS_KEY_ID}" -e AWS_SECRET_ACCESS_KEY="${AWS_SECRET_ACCESS_KEY}" -e AWS_DEFAULT_REGION="${AWS_DEFAULT_REGION}" nosaugowe/epltable:latest
         
-        
+    - name: Making a Sed Test
+      run: |
+        echo "Pulling Docker Image................."
+        echo $GITHUB_WORKSPACE
         
         
 
