@@ -19,7 +19,8 @@ jobs:
     - name: Checkout repo && run script
       run: |
            chmod +x $GITHUB_WORKSPACE/scripts/test.sh
-           bash $GITHUB_WORKSPACE/scripts/test.sh         
+           $github.event.client_payload.league 
+           #bash $GITHUB_WORKSPACE/scripts/test.sh         
       shell: bash
 
     - name: Login to Docker Hub
