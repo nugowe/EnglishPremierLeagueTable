@@ -16,10 +16,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - name: Run script file
+    - name: Checkout repo && run script
       run: |
-         echo "Checking the value for payload.."
-         echo ${{ github.event.client_payload.league }}
+         echo "Running the test bash script"
+         chmod +x ./scripts/test.sh
+         ./scripts/test.sh
       shell: bash
 
     - name: Login to Docker Hub
