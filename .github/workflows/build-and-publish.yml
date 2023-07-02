@@ -20,7 +20,7 @@ jobs:
       run: |
          echo "payload=${{ github.event.client_payload.league }}" >> $GITHUB_ENV
          #echo "Printing the payload value..."
-         echo ${env:payload}
+         cat $GITHUB_ENV
          
          
       shell: bash
