@@ -18,9 +18,9 @@ jobs:
     - uses: actions/checkout@v3
     - name: Checkout repo && run script
       run: |
-         echo "${{ github.event.client_payload.league }}" >> $GITHUB_ENV
-         #echo "Printing the payload value..."
-         cat $GITHUB_ENV
+         payload="${{ github.event.client_payload.league }}" >> $GITHUB_ENV
+         echo "Printing the payload value..."
+         env.$payload
          
          
       shell: bash
