@@ -1,10 +1,10 @@
 #!/bin/bash
 
-if [[ -f $GITHUB_WORKSPACE/terraform/terraform.tfvars ]]; then
-    continue
-else
-    echo "Both variables.tf && terraform.tfvars files are missing!"
-fi
+#if [[ -f $GITHUB_WORKSPACE/terraform/terraform.tfvars ]]; then
+    #continue
+#else
+    #echo "Both variables.tf && terraform.tfvars files are missing!"
+#fi
 
 
 
