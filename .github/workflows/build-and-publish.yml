@@ -18,10 +18,11 @@ jobs:
     - uses: actions/checkout@v3
     - name: Checkout repo && run script
       run: |
-         echo "Printing the payload value..."
-         ${{ github.event.client_payload.league }} 
-         chmod +x $GITHUB_WORKSPACE/scripts/test.sh
-         $GITHUB_WORKSPACE/scripts/test.sh
+         echo "payload=${{ github.event.client_payload.league }}" >> $GITHUB_ENV
+         #echo "Printing the payload value..."
+         echo ${env:payload}
+         
+         
       shell: bash
 
     - name: Login to Docker Hub
