@@ -18,12 +18,12 @@ jobs:
     - uses: actions/checkout@v3
     - name: Checkout repo && run script
       run: |
-           if [ ${{ github.ref }} == 'refs/heads/main' ]; then
-            echo "is MAIN branch"
-           elif [ ${{ github.ref }} == 'refs/heads/dev' ]; then
-            echo "is DEV branch"
+           if [ ${{ github.event.client_payload.league }} == 'epl' ]; then
+            echo "epl table selected!"
+           elif [ ${{ github.event.client_payload.league }} == 'laliga' ]; then
+            echo "laliga table selected!"
            else
-            echo "is neither MAIN nor DEV branch"
+            echo "is neither EPL nor LALIGA branch"
            fi
       shell: bash
 
