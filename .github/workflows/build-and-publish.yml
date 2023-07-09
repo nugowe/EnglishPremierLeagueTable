@@ -19,11 +19,11 @@ jobs:
     - name: Checkout repo && run script
       run: |
            if [ ${{ github.event.client_payload.league }} == 'epl' ]; then
-            echo "epl table selected!"
+            echo "EPL!"
            elif [ ${{ github.event.client_payload.league }} == 'laliga' ]; then
-            echo "laliga table selected!"
+            echo "Laliga!"
            else
-            echo "is neither EPL nor LALIGA branch"
+            echo "is neither EPL nor LALIGA"
            fi
       shell: bash
 
