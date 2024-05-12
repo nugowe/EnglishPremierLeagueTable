@@ -20,7 +20,7 @@ url <- "https://en.wikipedia.org/wiki/2023%E2%80%9324_Premier_League"
 
 session = bow(user_agent = "EPL-Table-Scrape", url)
 
-EPLTable <- scrape(session) %>% html_nodes("table.wikitable:nth-child(30)") %>% html_table()
+EPLTable <- scrape(session) %>% html_nodes("table.wikitable:nth-child(46)") %>% html_table()
 
 EPLTable <- as.data.frame(EPLTable)
 
