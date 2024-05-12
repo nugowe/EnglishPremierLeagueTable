@@ -37,7 +37,7 @@ names(EPLTable)[12] <- "Qualification/Regulation"
 names(EPLTable)[11] <- "Pts"
 
 EPLTable$Team <- unlist(strsplit(EPLTable$Team, " \\(.*\\)"))
-
+EPLTable$Pts <- gsub("\\[d\\]|\\[c\\]", "", EPLTable$Pts)
 Chelsealogo = "https://upload.wikimedia.org/wikipedia/en/c/cc/Chelsea_FC.svg"
 Liverpoollogo = "https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg"
 ManchesterCitylogo = "https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg"
@@ -145,7 +145,7 @@ gt(EPLTable) %>%
     <img src='https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg' class='topstrikerflag' style='height:100px;' 
     <br></br>
     <i style='font-family: Lato'; font-size:70px><strong>  TOP GOAL SCORER</strong></i>
-    <i style='font-family: Lato'; font-size:70px> | <strong>ERLING HAALAND</strong> | <strong>8 GOALS</strong>
+    <i style='font-family: Lato'; font-size:70px> | <strong>ERLING HAALAND</strong> | <strong>25 GOALS</strong>
     <p style='font-family: Roboto; font-size: 20px; background-color: #B3C7D6FF; color:black; font-weight:bold; font-style:italic'>English Premier League | Table Standings for the 2023/2024 Season</p>
     </div>
                     
@@ -229,14 +229,7 @@ gt(EPLTable) %>%
     alpha = NULL,
     apply_to = c("fill", "text"),
     autocolor_text = TRUE
-  ) %>% data_color(
-    
-    columns = "Pts",
-    colors = scales::col_numeric("Greens", n = 2 , domain = NULL),
-    alpha = NULL,
-    apply_to = c("fill", "text"),
-    autocolor_text = TRUE
-  ) %>% data_color(
+  )  %>% data_color(
     
     columns = "GD",
     colors = scales::col_factor("#DBAE58", n = 2 , domain = NULL),
