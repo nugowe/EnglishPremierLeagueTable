@@ -2,9 +2,9 @@
 
 # Loading the necessary R packages
 
-Rpackages=c("polite","rvest","kableExtra","gt","svglite")
+#Rpackages=c("polite","rvest","kableExtra","gt","svglite")
 
-for (packages in Rpackages){install.packages(packages)} 
+#for (packages in Rpackages){install.packages(packages)} 
 
 library(polite)
 library(tidyverse)
@@ -257,7 +257,10 @@ gt(EPLTable) %>%
     alpha = NULL,
     apply_to = c("fill", "text"),
     autocolor_text = TRUE
-  ) %>% 
+  ) %>% data_color(
+    
+    columns = "Pts"
+  ) %>%
   text_transform(
     locations = cells_body(c(Badge)),
     fn = function(x) {
