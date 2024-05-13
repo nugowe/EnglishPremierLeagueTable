@@ -61,7 +61,7 @@ Nottinghamforestlogo = "https://upload.wikimedia.org/wikipedia/en/e/e5/Nottingha
 
 logos <- c(Chelsealogo, Liverpoollogo, ManchesterCitylogo, ManchesterUnitedlogo, Evertonlogo, Brightonlogo, Brentfordlogo, TottenhamHotspurlogo, WestHamlogo, 
            
-           AstonVillalogo, Arsenallogo, WolverhamptonWandererslogo, Burnleylogo, CrystalPalacelogo, Fulhamlogo, LutonTownlogo, SheffieldUnitedFClogo, Brentfordlogo, Burnleylogo, Bournemouthlogo, NewcastleUnitedlogo, Nottinghamforestlogo)
+           AstonVillalogo, Arsenallogo, WolverhamptonWandererslogo, Burnleylogo, CrystalPalacelogo, Fulhamlogo, LutonTownlogo, SheffieldUnitedFClogo, Bournemouthlogo, NewcastleUnitedlogo, Nottinghamforestlogo)
 
 logolist <- list()
 for(k in 1:20){
