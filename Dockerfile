@@ -8,8 +8,7 @@ COPY . .
 
 RUN apt-get update && apt-get install -yq \
   curl \
-  apt-utils \
-  awscli 
+  apt-utils 
 
 RUN apt-get install -yq tzdata && \
     ln -fs /usr/share/zoneinfo/America/Chicago /etc/localtime && \

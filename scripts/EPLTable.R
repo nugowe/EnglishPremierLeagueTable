@@ -2,7 +2,7 @@
 
 # Loading the necessary R packages
 
-Rpackages=c("polite","rvest","kableExtra","gt","svglite")
+Rpackages=c("polite","rvest","kableExtra","gt","svglite","devtools","usethis")
 
 for (packages in Rpackages){install.packages(packages)} 
 
@@ -12,7 +12,8 @@ library(rvest)
 library(kableExtra)
 library(gt)
 library(svglite)
-
+library(devtools)
+library(usethis)
 
 
 url <- "https://en.wikipedia.org/wiki/2023%E2%80%9324_Premier_League"
@@ -20,7 +21,7 @@ url <- "https://en.wikipedia.org/wiki/2023%E2%80%9324_Premier_League"
 
 session = bow(user_agent = "EPL-Table-Scrape", url)
 
-EPLTable <- scrape(session) %>% html_nodes("table.wikitable:nth-child(46)") %>% html_table()
+EPLTable <- scrape(session) %>% html_nodes("table.wikitable:nth-child(49)") %>% html_table()
 
 EPLTable <- as.data.frame(EPLTable)
 
@@ -145,7 +146,7 @@ gt(EPLTable) %>%
     <img src='https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg' class='topstrikerflag' style='height:100px;' 
     <br></br>
     <i style='font-family: Lato'; font-size:70px><strong>  TOP GOAL SCORER</strong></i>
-    <i style='font-family: Lato'; font-size:70px> | <strong>ERLING HAALAND</strong> | <strong>25 GOALS</strong>
+    <i style='font-family: Lato'; font-size:70px> | <strong>ERLING HAALAND</strong> | <strong>27 GOALS</strong>
     <p style='font-family: Roboto; font-size: 20px; background-color: #B3C7D6FF; color:black; font-weight:bold; font-style:italic'>English Premier League | Table Standings for the 2023/2024 Season</p>
     </div>
                     
