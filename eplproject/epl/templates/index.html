@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html data-theme="cupcake" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EPL Season 2024 to 2025</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.23/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://unpkg.com/hyperscript.org@0.9.13"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.6" integrity="sha384-FhXw7b6AlE/jyjlZH5iHa/tTe9EpJ1Y55RjcgPbjeWMskSxZt1v9qkxLJWNJaGni" crossorigin="anonymous">
+    
+        tailwind.config = {
+            plugins: [require('daisyui')],
+        };
+    </script>
+    <style>
+        .hidden{
+            opacity: 0;
+            transition: opacity 1s ease-out;
+
+        }
+
+        .visible{
+            opacity: 1;
+            transition: opacity 1s ease-in
+        }
+        table{
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td{
+            padding: 100px;
+            border: 2px solid black;
+            font-size: 30px
+        }
+
+        th {
+            text-align: left;
+        }
+
+        td {
+            text-align: left;
+        }
+    </style>
+        
+    <style>
+        .carousel {
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            display: flex;
+            overflow-x: auto;
+            scrollbar-width: none; /* Hide scrollbar for Firefox */
+        }
+
+        .carousel::-webkit-scrollbar {
+            display: none; /* Hide scrollbar for Webkit */
+        }
+
+        .carousel-item {
+            scroll-snap-align: start;
+            flex: 0 0 100%; /* Each item takes full width */
+        }
+    </style>
+    <style>
+        .center-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 10vh;
+        }
+
+        .picture {
+            width: 100px;
+            height: 100px;
+            margin: 0 10px;
+        }
+    </style>
+    <style>
+        .carousel slide {
+            padding: 20px; 
+        }
+    </style>
+</head>
+<body class="m-0 p-0" style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
+    <div class="carousel-container  mx-auto">
+        <div class="relative">
+            <div class="carousel" id="carousel">
+                <div class="carousel-item  text-white text-center p-8">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/f/f2/Premier_League_Logo.svg" class="d-block mx-auto" alt="Image 1">
+                </div>
+                <div class="carousel-item  text-white text-center p-8">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/f/f2/Premier_League_Logo.svg" class="d-block mx-auto" alt="Image 1">
+                </div>
+                <div class="carousel-item  text-white text-center p-8">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/f/f2/Premier_League_Logo.svg" class="d-block mx-auto" alt="Image 1">
+                </div>
+            </div>
+            <!-- Navigation Buttons -->
+            <button class="absolute left-4 top-1/2 transform -translate-y-1/2  prev">
+                
+            </button>
+            <button class="absolute right-4 top-1/2 transform -translate-y-1/2  next">
+                
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const carousel = document.querySelector('#carousel');
+        const nextButton = document.querySelector('.next');
+        const prevButton = document.querySelector('.prev');
+        let autoScroll;
+
+        // Function to scroll to the next slide
+        const scrollNext = () => {
+            if (carousel.scrollLeft + carousel.clientWidth >= carousel.scrollWidth) {
+                carousel.scrollTo({ left: 0, behavior: 'smooth' });
+            } else {
+                carousel.scrollBy({ left: carousel.clientWidth, behavior: 'smooth' });
+            }
+        };
+
+        // Function to scroll to the previous slide
+        const scrollPrev = () => {
+            if (carousel.scrollLeft === 0) {
+                carousel.scrollTo({ left: carousel.scrollWidth, behavior: 'smooth' });
+            } else {
+                carousel.scrollBy({ left: -carousel.clientWidth, behavior: 'smooth' });
+            }
+        };
+
+        // Auto-scroll every 3 seconds
+        const startAutoScroll = () => {
+            autoScroll = setInterval(scrollNext, 3000);
+        };
+
+        const stopAutoScroll = () => {
+            clearInterval(autoScroll);
+        };
+
+        // Event listeners for manual navigation
+        nextButton.addEventListener('click', () => {
+            stopAutoScroll();
+            scrollNext();
+            startAutoScroll();
+        });
+
+        prevButton.addEventListener('click', () => {
+            stopAutoScroll();
+            scrollPrev();
+            startAutoScroll();
+        });
+
+        // Start auto-scroll on page load
+        document.addEventListener('DOMContentLoaded', startAutoScroll);
+    </script>
+
+    
+    <script src="https://cdn.logwork.com/widget/countdown.js"></script>
+    <script src="https://unpkg.com/hyperscript.org@0.9.13"></script>
+    <a href="https://logwork.com/countdown-timer" class="countdown-timer" data-timezone="America/Chicago" data-date="2025-06-16 20:00">THIS SEASON ENDS IN ....</a>
+    
+    
+ 
+
+
+
+</center>
+<center>
+<br>
+<br>
+<input
+  type="text"
+  placeholder="Search for your Team's League position..."
+  class="input input-bordered input-error w-full max-w-xs" />   <button class="btn btn-active btn-secondary">Clear</button>
+  <br>
+  <br>
+  <br>
+
+  
+</body>
+</html>
+
+

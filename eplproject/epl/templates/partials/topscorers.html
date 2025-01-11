@@ -1,0 +1,71 @@
+<center>
+<div  class="overflow-x-auto" data-theme="emerald">
+    <table class="table" _="every 1s add .hidden to me wait 1s remove me wait 1s show me add .visible to me">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>PLAYER NAME</th>
+            <th>CLUB NAME</th>
+            <th>CLUB LOGO</th>
+            <th>TOTAL NUMBER OF GOALS</th>
+        </tr>
+        </thead>
+        <tbody>
+    
+        <tr>
+        {% for goal_scorer in goal_scorers %}
+            <td>{{ goal_scorer.id }}</td>
+            <td>{{ goal_scorer.PLAYER_NAME }}</td>
+            <td>{{ goal_scorer.CLUB_NAME }}</td>
+            {% if goal_scorer.CLUB_NAME %}
+                {% if goal_scorer.CLUB_NAME == "Liverpool" %}
+                    <td><img src="https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg"  width="50" height=50 alt="Liverpoolfc_logo"></td>
+                {% elif goal_scorer.CLUB_NAME == "Arsenal" %}
+                    <td><img src="https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg"  width="50" height=50 alt="Arsenallogo"></td>
+                {% elif goal_scorer.CLUB_NAME == "Nottingham Forest" %}
+                    <td><img src="https://upload.wikimedia.org/wikipedia/en/e/e5/Nottingham_Forest_F.C._logo.svg" width="50" height=50  alt="NHF Logo"></td>
+                {% elif goal_scorer.CLUB_NAME == "Chelsea" %}
+                    <td><img src="https://upload.wikimedia.org/wikipedia/en/c/cc/Chelsea_FC.svg" width="50" height=50 alt="Chelsea Logo"></td>
+                {% elif goal_scorer.CLUB_NAME == "Newcastle United" %}
+                    <td><img src="https://upload.wikimedia.org/wikipedia/en/5/56/Newcastle_United_Logo.svg" width="50" height=50 alt="Newcastle_United_Logo"></td>
+                {% elif goal_scorer.CLUB_NAME == "Manchester City" %}
+                    <td><img src="https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg" width="50" height=50  alt="Manchester_City_FC_badge"></td>
+                {% elif goal_scorer.CLUB_NAME == "Bournemouth" %}
+                    <td><img src="https://upload.wikimedia.org/wikipedia/en/e/e5/AFC_Bournemouth_%282013%29.svg" width="50" height=50 alt="Bournemouth"></td>
+                {% elif goal_scorer.CLUB_NAME == "Aston Villa" %}
+                    <td><img src="https://upload.wikimedia.org/wikipedia/en/9/9f/Aston_Villa_logo.svg" width="50" height=50 alt="Aston_Villa_logo"></td>
+                {% elif goal_scorer.CLUB_NAME == "Fulham" %}
+                    <td><img src="https://upload.wikimedia.org/wikipedia/en/e/eb/Fulham_FC_%28shield%29.svg" width="50" height=50 alt="Fulham_FC_logo"></td>
+                {% elif goal_scorer.CLUB_NAME == "Brighton & Hove Albion" %}
+                    <td><img src="https://upload.wikimedia.org/wikipedia/en/f/fd/Brighton_%26_Hove_Albion_logo.svg" width="50" height=50 alt="Brighton"></td>
+                {% elif goal_scorer.CLUB_NAME == "Tottenham Hotspur" %}
+                    <td><img src="https://upload.wikimedia.org/wikipedia/en/b/b4/Tottenham_Hotspur.svg" width="50" height=50 alt="Tottenham_Hotspur"></td>
+                {% elif goal_scorer.CLUB_NAME == "Manchester United" %}
+                    <td><img src="https://upload.wikimedia.org/wikipedia/en/7/7a/Manchester_United_FC_crest.svg" width="50" height=50 alt="Manchester_United_FC_crest"></td>
+                {% elif goal_scorer.CLUB_NAME == "West Ham United" %}
+                    <td><img src="https://upload.wikimedia.org/wikipedia/en/c/c2/West_Ham_United_FC_logo.svg"  width="50" height=50 alt="West_Ham_United_FC_logo"></td>
+                {% elif goal_scorer.CLUB_NAME == "Crystal Palace" %}
+                    <td><img src="https://upload.wikimedia.org/wikipedia/en/a/a2/Crystal_Palace_FC_logo_%282022%29.svg" width="50" height=50  alt="Crystal"></td>
+                {% elif goal_scorer.CLUB_NAME == "Everton" %}
+                    <td><img src="https://upload.wikimedia.org/wikipedia/en/7/7c/Everton_FC_logo.svg" width="50" height=50 alt="Everton"></td>
+                {% elif goal_scorer.CLUB_NAME == "Wolverhampton Wanderers" %}
+                    <td><img src="https://upload.wikimedia.org/wikipedia/en/f/fc/Wolverhampton_Wanderers.svg" width="50" height=50 alt="Wolverhampton_Wanderers"></td>
+                {% elif goal_scorer.CLUB_NAME == "Ipswich Town" %}
+                    <td><img src="https://upload.wikimedia.org/wikipedia/en/thumb/4/43/Ipswich_Town.svg/283px-Ipswich_Town.svg.png" width="50" height=50 alt="Ipswich"></td>
+                {% elif goal_scorer.CLUB_NAME == "Leicester City" %}
+                    <td><img src="https://upload.wikimedia.org/wikipedia/en/thumb/2/2d/Leicester_City_crest.svg/316px-Leicester_City_crest.svg.png" width="50" height=50 alt="Leicester_City_crest"></td>
+                {% elif goal_scorer.CLUB_NAME == "Southampton" %}
+                    <td><img src="https://upload.wikimedia.org/wikipedia/en/thumb/c/c9/FC_Southampton.svg/296px-FC_Southampton.svg.png" width="50" height=50 alt="Southampton"></td>
+                {% endif %}
+            {% endif %}
+            <td>{{ goal_scorer.TOTAL_NUMBER_GOALS }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+</center>
+
+
+
+
