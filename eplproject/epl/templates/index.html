@@ -155,15 +155,20 @@
         // Start auto-scroll on page load
         document.addEventListener('DOMContentLoaded', startAutoScroll);
     </script>
-
-    
-    <script src="https://cdn.logwork.com/widget/countdown.js"></script>
     <script src="https://unpkg.com/hyperscript.org@0.9.13"></script>
-    <a href="https://logwork.com/countdown-timer" class="countdown-timer" data-timezone="America/Chicago" data-date="2025-06-16 20:00">THIS SEASON ENDS IN ....</a>
-    
+
+    <div class="justify-center">
+        <div class="bg-gray-300  rounded-lg w-90 h-90">
+            <script src="https://cdn.logwork.com/widget/countdown.js"></script>
+            <a href="https://logwork.com/countdown-timer" class="countdown-timer" data-timezone="America/Chicago" data-date="2025-06-16 20:00">THIS SEASON ENDS IN ....</a>
+        
+        </div>
+        
+    </div>
+   
     
  
-
+{% include 'partials/EPLTable.html' %}
 
 
 </center>
