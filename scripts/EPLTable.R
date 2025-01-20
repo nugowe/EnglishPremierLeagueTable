@@ -16,12 +16,14 @@ library(devtools)
 library(usethis)
 
 
+
+
 url <- "https://en.wikipedia.org/wiki/2023%E2%80%9324_Premier_League"
 
 
 session = bow(user_agent = "EPL-Table-Scrape", url)
 
-EPLTable <- scrape(session) %>% html_nodes("table.wikitable:nth-child(49)") %>% html_table()
+EPLTable <- scrape(session) %>% html_nodes("table.wikitable:nth-child(54)") %>% html_table()
 
 EPLTable <- as.data.frame(EPLTable)
 
