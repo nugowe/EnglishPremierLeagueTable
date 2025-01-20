@@ -15,12 +15,12 @@ library(svglite)
 
 
 
-url <- "https://en.wikipedia.org/wiki/2023%E2%80%9324_Premier_League"
+url <- "https://en.wikipedia.org/wiki/2024%E2%80%9325_Premier_League"
 
 
 session = bow(user_agent = "EPL-Table-Scrape", url)
 
-EPLTable <- scrape(session) %>% html_nodes("table.wikitable:nth-child(46)") %>% html_table()
+EPLTable <- scrape(session) %>% html_nodes("table.wikitable:nth-child(41)") %>% html_table()
 
 EPLTable <- as.data.frame(EPLTable)
 
@@ -37,7 +37,7 @@ names(EPLTable)[12] <- "Qualification/Regulation"
 names(EPLTable)[11] <- "Pts"
 
 EPLTable$Team <- unlist(strsplit(EPLTable$Team, " \\(.*\\)"))
-EPLTable$Pts <- gsub("\\[d\\]|\\[c\\]", "", EPLTable$Pts)
+
 Chelsealogo = "https://upload.wikimedia.org/wikipedia/en/c/cc/Chelsea_FC.svg"
 Liverpoollogo = "https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg"
 ManchesterCitylogo = "https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg"
@@ -47,21 +47,22 @@ Brightonlogo = "https://upload.wikimedia.org/wikipedia/en/f/fd/Brighton_%26_Hove
 Brentfordlogo ="https://upload.wikimedia.org/wikipedia/en/2/2a/Brentford_FC_crest.svg"
 TottenhamHotspurlogo = "https://upload.wikimedia.org/wikipedia/en/b/b4/Tottenham_Hotspur.svg"
 WestHamlogo = "https://upload.wikimedia.org/wikipedia/en/c/c2/West_Ham_United_FC_logo.svg"
-AstonVillalogo = "https://upload.wikimedia.org/wikipedia/en/9/9f/Aston_Villa_logo.svg"
+AstonVillalogo = "https://upload.wikimedia.org/wikipedia/en/thumb/9/9a/Aston_Villa_FC_new_crest.svg/177px-Aston_Villa_FC_new_crest.svg.png"
 Arsenallogo = "https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg"
 WolverhamptonWandererslogo = "https://upload.wikimedia.org/wikipedia/en/f/fc/Wolverhampton_Wanderers.svg"
-Burnleylogo = "https://upload.wikimedia.org/wikipedia/en/6/6d/Burnley_FC_Logo.svg"
+Southamptonlogo = "https://upload.wikimedia.org/wikipedia/en/thumb/c/c9/FC_Southampton.svg/210px-FC_Southampton.svg.png"
 CrystalPalacelogo = "https://upload.wikimedia.org/wikipedia/en/a/a2/Crystal_Palace_FC_logo_%282022%29.svg"
 Fulhamlogo = "https://upload.wikimedia.org/wikipedia/en/e/eb/Fulham_FC_%28shield%29.svg"
-LutonTownlogo = "https://upload.wikimedia.org/wikipedia/en/9/9d/Luton_Town_logo.svg"
-SheffieldUnitedFClogo = "https://upload.wikimedia.org/wikipedia/en/9/9c/Sheffield_United_FC_logo.svg"
+LeicesterCitylogo = "https://upload.wikimedia.org/wikipedia/en/thumb/2/2d/Leicester_City_crest.svg/240px-Leicester_City_crest.svg.png"
+IpswichTownlogo = "https://upload.wikimedia.org/wikipedia/en/thumb/4/43/Ipswich_Town.svg/192px-Ipswich_Town.svg.png"
 Bournemouthlogo = "https://upload.wikimedia.org/wikipedia/en/e/e5/AFC_Bournemouth_%282013%29.svg"
 NewcastleUnitedlogo = "https://upload.wikimedia.org/wikipedia/en/5/56/Newcastle_United_Logo.svg"
-Nottinghamforestlogo = "https://upload.wikimedia.org/wikipedia/en/e/e5/Nottingham_Forest_F.C._logo.svg"
+Nottinghamforestlogo = "https://upload.wikimedia.org/wikipedia/en/thumb/e/e5/Nottingham_Forest_F.C._logo.svg/113px-Nottingham_Forest_F.C._logo.svg.png"
+
 
 logos <- c(Chelsealogo, Liverpoollogo, ManchesterCitylogo, ManchesterUnitedlogo, Evertonlogo, Brightonlogo, Brentfordlogo, TottenhamHotspurlogo, WestHamlogo, 
            
-           AstonVillalogo, Arsenallogo, WolverhamptonWandererslogo, Burnleylogo, CrystalPalacelogo, Fulhamlogo, LutonTownlogo, SheffieldUnitedFClogo, Bournemouthlogo, NewcastleUnitedlogo, Nottinghamforestlogo)
+           AstonVillalogo, Arsenallogo, WolverhamptonWandererslogo, Southamptonlogo, CrystalPalacelogo, Fulhamlogo, LeicesterCitylogo, IpswichTownlogo, Bournemouthlogo, NewcastleUnitedlogo, Nottinghamforestlogo)
 
 logolist <- list()
 for(k in 1:20){
@@ -104,7 +105,7 @@ for(k in 1:20){
     }else if(i == "Wolverhampton Wanderers"){
       
       logolist <- append(logolist, logos[12])
-    }else if(i == "Burnley" ){
+    }else if(i == "Southampton" ){
       
       logolist <- append(logolist, logos[13])
     }else if(i == "Crystal Palace"){
@@ -113,10 +114,10 @@ for(k in 1:20){
     }else if(i == "Fulham"){
       
       logolist <- append(logolist, logos[15])
-    }else if(i == "Luton Town" ){
+    }else if(i == "Leicester City" ){
       
       logolist <- append(logolist, logos[16])
-    }else if(i == "Sheffield United"  ){
+    }else if(i == "Ipswich Town"  ){
       
       logolist <- append(logolist, logos[17])
     }else if(i == "Bournemouth" ){
@@ -140,13 +141,13 @@ gt(EPLTable) %>%
     
     title = html("<img src='https://upload.wikimedia.org/wikipedia/en/f/f2/Premier_League_Logo.svg' style='height:70px;'>"),
     subtitle = html("<div style='background-color:#FCF6F5FF'>
-    <img src='https://resources.premierleague.com/premierleague/photos/players/250x250/p223094.png' class='topstriker' style='height:100px;' 
+    <img src='https://resources.premierleague.com/premierleague/photos/players/250x250/p118748.png' class='topstriker' style='height:100px;' 
     <div>
-    <img src='https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg' class='topstrikerflag' style='height:100px;' 
+    <img src='https://upload.wikimedia.org/wikipedia/en/thumb/0/0c/Liverpool_FC.svg/176px-Liverpool_FC.svg.png' class='topstrikerflag' style='height:100px;' 
     <br></br>
     <i style='font-family: Lato'; font-size:70px><strong>  TOP GOAL SCORER</strong></i>
-    <i style='font-family: Lato'; font-size:70px> | <strong>ERLING HAALAND</strong> | <strong>25 GOALS</strong>
-    <p style='font-family: Roboto; font-size: 20px; background-color: #B3C7D6FF; color:black; font-weight:bold; font-style:italic'>English Premier League | Table Standings for the 2023/2024 Season</p>
+    <i style='font-family: Lato'; font-size:70px> | <strong>MOHAMMED SALAH</strong> | <strong>18 GOALS</strong>
+    <p style='font-family: Roboto; font-size: 20px; background-color: #B3C7D6FF; color:black; font-weight:bold; font-style:italic'>English Premier League | Table Standings for the 2024/2025 Season</p>
     </div>
                     
                   </div>"))%>% cols_align(
@@ -190,77 +191,81 @@ gt(EPLTable) %>%
   )%>%  data_color(
     
     columns = "Pld",
-    colors = scales::col_numeric("#488A99", n = 2 , domain = NULL),
+    colors = "#488A99",
     alpha = NULL,
     apply_to = c("fill", "text"),
     autocolor_text = TRUE
   ) %>% data_color(
     
     columns = "W",
-    colors = scales::col_numeric("#1C4E80", n = 2 , domain = NULL),
+    colors = "#1C4E80",
     alpha = NULL,
     apply_to = c("fill", "text"),
     autocolor_text = TRUE
   ) %>% data_color(
     
     columns = "D",
-    colors = scales::col_numeric("#CD5C5C", n = 2 , domain = NULL),
+    colors = "#CD5C5C",
     alpha = NULL,
     apply_to = c("fill", "text"),
     autocolor_text = TRUE
   ) %>% data_color(
     
     columns = "L",
-    colors = scales::col_numeric("#AC3E31", n = 2 , domain = NULL),
+    colors = "#AC3E31",
     alpha = NULL,
     apply_to = c("fill", "text"),
     autocolor_text = TRUE
   ) %>% data_color(
     
     columns = "GF",
-    colors = scales::col_numeric("#7E909A", n = 2 , domain = NULL),
+    colors = "#7E909A",
     alpha = NULL,
     apply_to = c("fill", "text"),
     autocolor_text = TRUE
   ) %>% data_color(
     
     columns = "GA",
-    colors = scales::col_numeric("#A5D8DD", n = 2 , domain = NULL),
+    colors = "#A5D8DD",
     alpha = NULL,
     apply_to = c("fill", "text"),
     autocolor_text = TRUE
-  )  %>% data_color(
+  ) %>% data_color(
+    
+    columns = "Pts",
+    colors = "Greens",
+    alpha = NULL,
+    apply_to = c("fill", "text"),
+    autocolor_text = TRUE
+  ) %>% data_color(
     
     columns = "GD",
-    colors = scales::col_factor("#DBAE58", n = 2 , domain = NULL),
+    colors = "#DBAE58", 
     alpha = NULL,
     apply_to = c("fill", "text"),
     autocolor_text = TRUE
   ) %>% data_color(
     
     columns = "Team",
-    colors = scales::col_factor("#CED2CC", n = 2 , domain = NULL),
+    colors = "#CED2CC",
     alpha = NULL,
     apply_to = c("fill", "text"),
     autocolor_text = TRUE
   ) %>% data_color(
     
     columns = "Pos",
-    colors = scales::col_factor("#CED2CC", n = 2 , domain = NULL),
+    colors = "#CED2CC",
     alpha = NULL,
     apply_to = c("fill", "text"),
     autocolor_text = TRUE
   )%>% data_color(
     
     columns = "Badge",
-    colors = scales::col_factor("#CED2CC", n = 2 , domain = NULL),
+    colors = "#CED2CC", 
     alpha = NULL,
     apply_to = c("fill", "text"),
     autocolor_text = TRUE
-  ) %>% data_color(
-    
-    columns = "Pts"
-  ) %>%
+  ) %>% 
   text_transform(
     locations = cells_body(c(Badge)),
     fn = function(x) {
