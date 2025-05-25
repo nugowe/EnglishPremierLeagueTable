@@ -6,8 +6,7 @@ TODO:
 3) Kubernetes Container orchestration and TLS Binding on an nginx Load Balancer.
 4) Automated Table Delivery using R's Blastula Package
 
-![Image](https://github.com/user-attachments/assets/9fcdf962-a27b-4bd0-a1e4-4e741285772c)
-![Image](https://github.com/user-attachments/assets/87aefeaf-d06c-492b-af79-0cbf02a70f0c)
+![Image](https://github.com/user-attachments/assets/3d281d22-0252-4f32-9343-76d5a05be3b8)
 ![Screenshot from 2022-03-14 13-21-49](https://user-images.githubusercontent.com/25004712/158236482-333ade08-a2ad-4ff3-be3f-487dc72ae81f.png)
 
 STEP 1: External API call triggers the Pipeline (Postman in my case)
