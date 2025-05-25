@@ -28,7 +28,7 @@ WORKDIR /opt/nginx
 
 #RUN mkdir /usr/share/data && mkdir /usr/share/data/www
 
-COPY --from=R-code /opt/epl/EPLTable.html .
+COPY --from=R-code /opt/epl/TableEPL.html .
 
 #COPY --from=R-code /opt/epl/EPLTable.html /usr/share/data/www
 
