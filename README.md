@@ -6,7 +6,7 @@ TODO:
 3) Kubernetes Container orchestration and TLS Binding on an nginx Load Balancer.
 4) Automated Table Delivery using R's Blastula Package
 
-![Image](https://github.com/user-attachments/assets/8541906e-6c88-487c-a139-9382ded714c1)
+![Image](https://github.com/user-attachments/assets/5aba5522-7144-48df-a01b-d4482cbfb19b)
 
 ![Screenshot from 2022-03-14 13-21-49](https://user-images.githubusercontent.com/25004712/158236482-333ade08-a2ad-4ff3-be3f-487dc72ae81f.png)
 
