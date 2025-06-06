@@ -151,7 +151,7 @@ for(k in 1:20){
 }
 
 
-
+#GT Tables
 
 gt(EPLTable) %>%
   tab_header(
@@ -163,7 +163,7 @@ gt(EPLTable) %>%
     <img src='https://resources.premierleague.com/premierleague/photos/players/250x250/p118748.png' class='topstrikerflag' style='height:100px;' 
     <br></br>
     <i style='font-family: Lato'; font-size:70px><strong>  TOP GOAL SCORER</strong></i>
-    <i style='font-family: Lato'; font-size:70px> | <strong>MOHAMMED SALAH</strong> | <strong>28 GOALS</strong>
+    <i style='font-family: Lato'; font-size:70px> | <strong>MOHAMMED SALAH</strong> | <strong>29 GOALS</strong>
     <p style='font-family: Roboto; font-size: 20px; background-color: #B3C7D6FF; color:black; font-weight:bold; font-style:italic'>English Premier League | Table Standings for the 2023/2024 Season</p>
     </div>
                     
