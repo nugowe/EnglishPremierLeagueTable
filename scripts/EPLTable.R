@@ -22,7 +22,6 @@ library(rvest)
 library(kableExtra)
 library(gt)
 library(svglite)
-library(devtools)
 library(usethis)
 
 
@@ -33,7 +32,7 @@ url <- "https://en.wikipedia.org/wiki/2024%E2%80%9325_Premier_League"
 
 session = bow(user_agent = "EPL-Table-Scrape", url)
 
-EPLTable <- scrape(session) %>% html_nodes("table.wikitable:nth-child(50)") %>% html_table()
+EPLTable <- scrape(session) %>% html_nodes("table.wikitable:nth-child(43)") %>% html_table()
 
 EPLTable <- as.data.frame(EPLTable)
 
@@ -151,7 +150,7 @@ for(k in 1:20){
 }
 
 
-#GT Tables
+
 
 gt(EPLTable) %>%
   tab_header(
@@ -159,12 +158,16 @@ gt(EPLTable) %>%
     title = html("<img src='https://upload.wikimedia.org/wikipedia/en/f/f2/Premier_League_Logo.svg' style='height:70px;'>"),
     subtitle = html("<div style='background-color:#FCF6F5FF'>
     <img src='https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg' class='topstriker' style='height:100px;' 
+    
     <div>
     <img src='https://resources.premierleague.com/premierleague/photos/players/250x250/p118748.png' class='topstrikerflag' style='height:100px;' 
+    <div>
+      <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Flag_of_Egypt.svg/330px-Flag_of_Egypt.svg.png' class='topstrikerhomeflag' style='height:90px;width:90px' 
+    </div>
     <br></br>
     <i style='font-family: Lato'; font-size:70px><strong>  TOP GOAL SCORER</strong></i>
     <i style='font-family: Lato'; font-size:70px> | <strong>MOHAMMED SALAH</strong> | <strong>29 GOALS</strong>
-    <p style='font-family: Roboto; font-size: 20px; background-color: #B3C7D6FF; color:black; font-weight:bold; font-style:italic'>English Premier League | Table Standings for the 2023/2024 Season</p>
+    <p style='font-family: Roboto; font-size: 20px; background-color: #E6B3FF; color:black; font-weight:bold; font-style:italic'>English Premier League | Table Standings for the 2024/2025 Season</p>
     </div>
                     
                   </div>"))%>% cols_align(
