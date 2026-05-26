@@ -1,306 +1,537 @@
-#!/usr/bin/R
+# =========================================================
+# PACKAGES
+# =========================================================
 
-# Loading the necessary R packages
+packages = c("gt", "htmltools", "glue", "dplyr", "scales")
 
-#Rpackages=c("polite==0.1.3","rvest==1.0.4","kableExtra==1.4.0","gt==0.11.1","svglite==2.1.3","devtools","usethis==3.1.0")
-
-#for (packages in Rpackages){install.packages(packages)} 
-
-install.packages("remotes")
-
-remotes::install_version("polite", version = "0.1.3")
-remotes::install_version("rvest", version = "1.0.4")
-remotes::install_version("kableExtra", version = "1.4.0")
-remotes::install_version("gt", version = "0.11.1")
-remotes::install_version("svglite", version = "2.1.3")
-remotes::install_version("usethis", version = "3.1.0")
+for(package in packages){install.packages(package)}
 
 
-library(polite)
-library(tidyverse)
-library(rvest)
-library(kableExtra)
+
 library(gt)
-library(svglite)
-library(usethis)
+library(htmltools)
+library(glue)
+library(dplyr)
+library(scales)
 
 
+# =========================================================
+# EPL TABLE (2025/26 UPDATED)
+# =========================================================
+EPLTable <- data.frame(
 
+  Pos = 1:20,
 
-url <- "https://en.wikipedia.org/wiki/2024%E2%80%9325_Premier_League"
+  Team = c(
+    "Arsenal",
+    "Manchester City",
+    "Manchester United",
+    "Aston Villa",
+    "Liverpool",
+    "Bournemouth",
+    "Sunderland",
+    "Brighton & Hove Albion",
+    "Brentford",
+    "Chelsea",
+    "Fulham",
+    "Newcastle United",
+    "Everton",
+    "Leeds United",
+    "Crystal Palace",
+    "Nottingham Forest",
+    "Tottenham Hotspur",
+    "West Ham United",
+    "Burnley",
+    "Wolverhampton Wanderers"
+  ),
 
+  Pld = rep(38, 20),
 
-session = bow(user_agent = "EPL-Table-Scrape", url)
+  W = c(
+    26,23,20,19,17,
+    13,14,14,14,14,
+    15,14,13,11,11,
+    11,10,10,4,3
+  ),
 
-EPLTable <- scrape(session) %>% html_nodes("table.wikitable:nth-child(43)") %>% html_table()
+  D = c(
+    7,9,11,8,9,
+    18,12,11,11,10,
+    7,7,10,14,12,
+    11,11,9,10,11
+  ),
 
-EPLTable <- as.data.frame(EPLTable)
+  L = c(
+    5,6,7,11,12,
+    7,12,13,13,14,
+    16,17,15,13,15,
+    16,17,19,24,24
+  ),
 
-WebscrapeTime <- format(Sys.time(), "%A %B %Y, %H:%M:%S (CST)")
+  GF = c(
+    71,77,69,56,63,
+    58,42,52,55,58,
+    47,53,47,49,41,
+    48,48,46,38,27
+  ),
 
-EPLTable <- as.data.frame(EPLTable)
+  GA = c(
+    27,35,50,49,53,
+    54,48,46,52,52,
+    51,55,50,56,51,
+    51,57,65,75,68
+  ),
 
-EPLTable$Badge<- ""
+  GD = c(
+    44,42,19,7,10,
+    4,-6,6,3,6,
+    -4,-2,-3,-7,-10,
+    -3,-9,-19,-37,-41
+  ),
 
-EPLTable <- EPLTable[,c(1,12,2:11)]
+  Pts = c(
+    85,78,71,65,60,
+    57,54,53,53,52,
+    52,49,49,47,45,
+    44,41,39,22,20
+  ),
 
-names(EPLTable)[12] <- "Qualification/Regulation"
+  Qual = c(
+    "UCL",
+    "UCL",
+    "UCL",
+    "UCL",
+    "UCL",
+    "UEL",
+    "",
+    "UECL",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "Relegated",
+    "Relegated",
+    "Relegated"
+  )
+)
 
-names(EPLTable)[11] <- "Pts"
+# =========================================================
+# CLUB LOGOS
+# =========================================================
+logos <- c(
 
-EPLTable$Team <- unlist(strsplit(EPLTable$Team, " \\(.*\\)"))
-EPLTable$Pts <- gsub("\\[d\\]|\\[c\\]", "", EPLTable$Pts)
-Chelsealogo = "https://upload.wikimedia.org/wikipedia/en/c/cc/Chelsea_FC.svg"
-Liverpoollogo = "https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg"
-ManchesterCitylogo = "https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg"
-ManchesterUnitedlogo = "https://upload.wikimedia.org/wikipedia/en/7/7a/Manchester_United_FC_crest.svg"
-Evertonlogo = "https://upload.wikimedia.org/wikipedia/en/7/7c/Everton_FC_logo.svg"
-Brightonlogo = "https://upload.wikimedia.org/wikipedia/en/f/fd/Brighton_%26_Hove_Albion_logo.svg"
-Brentfordlogo ="https://upload.wikimedia.org/wikipedia/en/2/2a/Brentford_FC_crest.svg"
-TottenhamHotspurlogo = "https://upload.wikimedia.org/wikipedia/en/b/b4/Tottenham_Hotspur.svg"
-WestHamlogo = "https://upload.wikimedia.org/wikipedia/en/c/c2/West_Ham_United_FC_logo.svg"
-AstonVillalogo = "https://upload.wikimedia.org/wikipedia/en/thumb/9/9a/Aston_Villa_FC_new_crest.svg/250px-Aston_Villa_FC_new_crest.svg.png"
-Arsenallogo = "https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg"
-WolverhamptonWandererslogo = "https://upload.wikimedia.org/wikipedia/en/f/fc/Wolverhampton_Wanderers.svg"
-Burnleylogo = "https://upload.wikimedia.org/wikipedia/en/6/6d/Burnley_FC_Logo.svg"
-CrystalPalacelogo = "https://upload.wikimedia.org/wikipedia/en/a/a2/Crystal_Palace_FC_logo_%282022%29.svg"
-Fulhamlogo = "https://upload.wikimedia.org/wikipedia/en/e/eb/Fulham_FC_%28shield%29.svg"
-#LutonTownlogo = "https://upload.wikimedia.org/wikipedia/en/9/9d/Luton_Town_logo.svg"
-#SheffieldUnitedFClogo = "https://upload.wikimedia.org/wikipedia/en/9/9c/Sheffield_United_FC_logo.svg"
-Bournemouthlogo = "https://upload.wikimedia.org/wikipedia/en/e/e5/AFC_Bournemouth_%282013%29.svg"
-NewcastleUnitedlogo = "https://upload.wikimedia.org/wikipedia/en/5/56/Newcastle_United_Logo.svg"
-Nottinghamforestlogo = "https://upload.wikimedia.org/wikipedia/en/e/e5/Nottingham_Forest_F.C._logo.svg"
-IpswichTownlogo="https://upload.wikimedia.org/wikipedia/en/thumb/4/43/Ipswich_Town.svg/250px-Ipswich_Town.svg.png"
-Leicestercitylogo="https://upload.wikimedia.org/wikipedia/en/thumb/2/2d/Leicester_City_crest.svg/250px-Leicester_City_crest.svg.png"
-Southamptionlogo="https://upload.wikimedia.org/wikipedia/en/thumb/c/c9/FC_Southampton.svg/250px-FC_Southampton.svg.png"
+  "Arsenal"="https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg",
 
+  "Manchester City"="https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg",
 
+  "Manchester United"="https://upload.wikimedia.org/wikipedia/en/7/7a/Manchester_United_FC_crest.svg",
 
-logos <- c(Chelsealogo, Liverpoollogo, ManchesterCitylogo, ManchesterUnitedlogo, Evertonlogo, Brightonlogo, Brentfordlogo, TottenhamHotspurlogo, WestHamlogo, 
-           
-           AstonVillalogo, Arsenallogo, WolverhamptonWandererslogo, Leicestercitylogo, CrystalPalacelogo, Fulhamlogo, Southamptionlogo, IpswichTownlogo, Bournemouthlogo, NewcastleUnitedlogo, Nottinghamforestlogo)
+  "Aston Villa"="https://upload.wikimedia.org/wikipedia/en/9/9a/Aston_Villa_FC_new_crest.svg",
 
-logolist <- list()
-for(k in 1:20){
-  
-  for(i in EPLTable$Team[k]){
-    
-    if(i == "Chelsea"){
-      logolist <- append(logolist, Chelsealogo)
-      
-    }else if(i == "Liverpool"){
-      
-      logolist <- append(logolist, Liverpoollogo)
-    }else if(i == "Manchester City"){
-      
-      logolist <- append(logolist, ManchesterCitylogo)
-    }else if(i == "Manchester United"){
-      
-      logolist <- append(logolist, ManchesterUnitedlogo)
-    }else if(i == "Everton"){
-      
-      logolist <- append(logolist, Evertonlogo)
-    }else if(i == "Brighton & Hove Albion" ){
-      
-      logolist <- append(logolist, Brightonlogo)
-    }else if(i == "Brentford"){
-      
-      logolist <- append(logolist, Brentfordlogo)
-    }else if(i == "Tottenham Hotspur"  ){
-      
-      logolist <- append(logolist, TottenhamHotspurlogo)
-    }else if(i == "West Ham United"   ){
-      
-      logolist <- append(logolist, WestHamlogo)
-    }else if(i == "Aston Villa"    ){
-      
-      logolist <- append(logolist, AstonVillalogo)
-    }else if(i == "Arsenal"  ){
-      
-      logolist <- append(logolist, Arsenallogo)
-    }else if(i == "Wolverhampton Wanderers"){
-      
-      logolist <- append(logolist, WolverhamptonWandererslogo)
-    }else if(i == "Leicester City" ){
-      
-      logolist <- append(logolist, Leicestercitylogo)
-    }else if(i == "Crystal Palace"){
-      
-      logolist <- append(logolist, CrystalPalacelogo)
-    }else if(i == "Fulham"){
-      
-      logolist <- append(logolist, Fulhamlogo)
-    }else if(i == "Southampton" ){
-      
-      logolist <- append(logolist, Southamptionlogo)
-    }else if(i == "Ipswich Town"  ){
-      
-      logolist <- append(logolist, IpswichTownlogo)
-    }else if(i == "Bournemouth" ){
-      
-      logolist <- append(logolist, Bournemouthlogo)
-    }else if(i == "Newcastle United"  ){
-      
-      logolist <- append(logolist, NewcastleUnitedlogo)
-    }else if(i == "Nottingham Forest" ){
-      
-      logolist <- append(logolist, Nottinghamforestlogo)
+  "Liverpool"="https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg",
+
+  "Bournemouth"="https://upload.wikimedia.org/wikipedia/en/e/e5/AFC_Bournemouth_%282013%29.svg",
+
+  "Sunderland"="https://upload.wikimedia.org/wikipedia/en/7/77/Logo_Sunderland.svg",
+
+  "Brighton & Hove Albion"="https://upload.wikimedia.org/wikipedia/en/f/fd/Brighton_%26_Hove_Albion_logo.svg",
+
+  "Brentford"="https://upload.wikimedia.org/wikipedia/en/2/2a/Brentford_FC_crest.svg",
+
+  "Chelsea"="https://upload.wikimedia.org/wikipedia/en/c/cc/Chelsea_FC.svg",
+
+  "Fulham"="https://upload.wikimedia.org/wikipedia/en/e/eb/Fulham_FC_%28shield%29.svg",
+
+  "Newcastle United"="https://upload.wikimedia.org/wikipedia/en/5/56/Newcastle_United_Logo.svg",
+
+  "Everton"="https://upload.wikimedia.org/wikipedia/en/7/7c/Everton_FC_logo.svg",
+
+  "Leeds United"="https://upload.wikimedia.org/wikipedia/en/5/54/Leeds_United_F.C._logo.svg",
+
+  "Crystal Palace"="https://upload.wikimedia.org/wikipedia/en/a/a2/Crystal_Palace_FC_logo_%282022%29.svg",
+
+  "Nottingham Forest"="https://upload.wikimedia.org/wikipedia/en/e/e5/Nottingham_Forest_F.C._logo.svg",
+
+  "Tottenham Hotspur"="https://upload.wikimedia.org/wikipedia/en/b/b4/Tottenham_Hotspur.svg",
+
+  "West Ham United"="https://upload.wikimedia.org/wikipedia/en/c/c2/West_Ham_United_FC_logo.svg",
+
+  "Burnley"="https://upload.wikimedia.org/wikipedia/en/6/6d/Burnley_FC_Logo.svg",
+
+  "Wolverhampton Wanderers"="https://upload.wikimedia.org/wikipedia/en/f/fc/Wolverhampton_Wanderers.svg"
+)
+
+EPLTable$Badge <- logos[EPLTable$Team]
+
+# =========================================================
+# TOP SCORER
+# =========================================================
+TopScorer <- "Erling Haaland"
+TopGoals <- 27
+
+TopScorerImg <- "https://resources.premierleague.com/premierleague/photos/players/250x250/p223094.png"
+
+ManCityLogo <- logos["Manchester City"]
+
+EPLLogo <- "https://upload.wikimedia.org/wikipedia/en/f/f2/Premier_League_Logo.svg"
+
+# =========================================================
+# REORDER COLUMNS
+# =========================================================
+EPLTable <- EPLTable %>%
+  select(
+    Pos,
+    Badge,
+    Team,
+    Pld,
+    W,
+    D,
+    L,
+    GF,
+    GA,
+    GD,
+    Pts,
+    Qual
+  )
+
+# =========================================================
+# BUILD GT TABLE
+# =========================================================
+EPL_GT <- gt(EPLTable) %>%
+
+  # =====================================================
+  # BADGES
+  # =====================================================
+  text_transform(
+    locations = cells_body(columns = Badge),
+    fn = function(x) {
+      web_image(EPLTable$Badge, height = 30)
     }
-  }
+  ) %>%
+
+  cols_label(
+    Badge = ""
+  ) %>%
+
+  # =====================================================
+  # HEADER
+  # =====================================================
+  tab_header(
+
+    title = html(glue("
+      <div style='text-align:center;'>
+
+        <img src='{EPLLogo}'
+             style='height:90px;'>
+
+      </div>
+    ")),
+
+    subtitle = html(glue("
+
+      <div style='
+        background:#F5F5F5;
+        padding:20px;
+        border-radius:18px;
+
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        gap:28px;
+      '>
+
+        <img src='{ManCityLogo}'
+             style='height:70px;'>
+
+        <img src='{TopScorerImg}'
+             style='height:150px;width:150px;'>
+
+        <div style='text-align:left;'>
+
+          <div style='
+            background:#D00000;
+            color:white;
+
+            padding:6px 14px;
+
+            border-radius:10px;
+
+            font-size:13px;
+            font-weight:bold;
+
+            display:inline-block;
+          '>
+
+            TOP GOAL SCORER
+
+          </div>
+
+          <h2 style='margin:10px 0 0 0;'>
+
+            {TopScorer}
+
+          </h2>
+
+          <h3 style='margin:0;color:#D00000;'>
+
+            {TopGoals} Goals
+
+          </h3>
+
+        </div>
+
+      </div>
+
+    "))
+  ) %>%
+
+  # =====================================================
+  # COLUMN WIDTHS
+  # =====================================================
+  cols_width(
+    Team ~ px(320),
+    Qual ~ px(180)
+  ) %>%
+
+  # =====================================================
+  # ALIGNMENT
+  # =====================================================
+  cols_align(
+    columns = everything(),
+    align = "center"
+  ) %>%
+
+  cols_align(
+    columns = Team,
+    align = "left"
+  ) %>%
+
+  # =====================================================
+  # COLORS
+  # =====================================================
+  data_color(
+    W,
+    colors = col_numeric(
+      c("#E8F5E9", "#2E7D32"),
+      NULL
+    )
+  ) %>%
+
+  data_color(
+    D,
+    colors = col_numeric(
+      c("#FFF8E1", "#FFB300"),
+      NULL
+    )
+  ) %>%
+
+  data_color(
+    L,
+    colors = col_numeric(
+      c("#FDECEC", "#C62828"),
+      NULL
+    )
+  ) %>%
+
+  data_color(
+    GF,
+    colors = col_numeric(
+      c("#E3F2FD", "#1565C0"),
+      NULL
+    )
+  ) %>%
+
+  data_color(
+    Pts,
+    colors = col_numeric(
+      c("#E3F2FD", "#64B5F6"),
+      NULL
+    )
+  ) %>%
+
+  # =====================================================
+  # UCL POINTS BLACK TEXT
+  # =====================================================
+  tab_style(
+    style = cell_text(
+      color = "black",
+      weight = "bold"
+    ),
+
+    locations = cells_body(
+      columns = Pts,
+      rows = 1:5
+    )
+  ) %>%
+
+  # =====================================================
+  # CHAMPIONS
+  # =====================================================
+  tab_style(
+    style = list(
+      cell_fill(color = "#FFF8E1"),
+      cell_text(weight = "bold")
+    ),
+
+    locations = cells_body(
+      rows = 1
+    )
+  ) %>%
+
+  # =====================================================
+  # UCL QUALIFIERS
+  # =====================================================
+  tab_style(
+    style = list(
+      cell_fill(color = "#E8F0FE")
+    ),
+
+    locations = cells_body(
+      rows = 1:5
+    )
+  ) %>%
+
+  # =====================================================
+  # RELEGATION
+  # =====================================================
+  tab_style(
+    style = list(
+      cell_fill(color = "#FDECEC")
+    ),
+
+    locations = cells_body(
+      rows = 18:20
+    )
+  ) %>%
+
+  # =====================================================
+  # FONT
+  # =====================================================
+  opt_table_font(
+    font = google_font("Roboto Condensed")
+  ) %>%
+
+  # =====================================================
+  # TABLE OPTIONS
+  # =====================================================
+  tab_options(
+
+    table.width = pct(100),
+
+    container.width = pct(100),
+
+    table.font.size = px(14),
+
+    data_row.padding = px(8),
+
+    table.border.top.width = px(0),
+
+    table.border.bottom.width = px(0)
+  ) %>%
+
+  # =====================================================
+  # FULLSCREEN CSS
+  # =====================================================
+  opt_css("
+    body {
+      zoom: 1.08;
+      background: #FFFFFF;
+    }
+  ") %>%
+
+  # =====================================================
+  # SOURCE NOTES
+  # =====================================================
+  tab_source_note(
+    source_note = md(
+      'Source: Premier League + Wikipedia'
+    )
+  ) %>%
+
+  tab_source_note(
+    source_note = glue(
+      'Updated: {Sys.time()}'
+    )
+  )
+
+# =========================================================
+# SAVE HTML
+# =========================================================
+file <- "/opt/epl/TableEPL.html"
+
+gtsave(EPL_GT, file)
+
+# =========================================================
+# MASSIVE CONFETTI SCRIPT
+# =========================================================
+html <- readLines(file)
+
+confetti_script <- "
+
+<script src='https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js'></script>
+
+<script>
+
+function fireConfetti() {
+
+  // LEFT CANNON
+  confetti({
+    particleCount: 140,
+    angle: 60,
+    spread: 140,
+    origin: { x: 0, y: 0.60 }
+  });
+
+  // RIGHT CANNON
+  confetti({
+    particleCount: 140,
+    angle: 120,
+    spread: 140,
+    origin: { x: 1, y: 0.60 }
+  });
+
+  // TOP CENTER BURST
+  confetti({
+    particleCount: 220,
+    spread: 180,
+    startVelocity: 45,
+    origin: { y: 0.02 }
+  });
+
+  // RANDOM FLOATING BURST
+  confetti({
+    particleCount: 80,
+    spread: 360,
+    scalar: 1.2,
+    origin: {
+      x: Math.random(),
+      y: Math.random() * 0.4
+    }
+  });
+
 }
 
+setInterval(fireConfetti, 1400);
 
+</script>
+"
 
+html <- sub(
+  "</body>",
+  paste0(confetti_script, "\n</body>"),
+  html
+)
 
-gt(EPLTable) %>%
-  tab_header(
-    
-    title = html("<img src='https://upload.wikimedia.org/wikipedia/en/f/f2/Premier_League_Logo.svg' style='height:70px;'>"),
-    subtitle = html("<div style='background-color:#FCF6F5FF'>
-    <img src='https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg' class='topstriker' style='height:100px;' 
-    
-    <div>
-    <img src='https://resources.premierleague.com/premierleague/photos/players/250x250/p118748.png' class='topstrikerflag' style='height:100px;' 
-    <div>
-      <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Flag_of_Egypt.svg/330px-Flag_of_Egypt.svg.png' class='topstrikerhomeflag' style='height:90px;width:90px' 
-    </div>
-    <br></br>
-    <i style='font-family: Lato'; font-size:70px><strong>  TOP GOAL SCORER</strong></i>
-    <i style='font-family: Lato'; font-size:70px> | <strong>MOHAMMED SALAH</strong> | <strong>29 GOALS</strong>
-    <p style='font-family: Roboto; font-size: 20px; background-color: #E6B3FF; color:black; font-weight:bold; font-style:italic'>English Premier League | Table Standings for the 2024/2025 Season</p>
-    </div>
-                    
-                  </div>"))%>% cols_align(
-                    align = "center",
-                    columns = 1
-                  ) %>% cols_align(
-                    align = "left",
-                    columns = 2
-                  ) %>% cols_align(
-                    align = "center",
-                    columns = 3
-                  ) %>% cols_align(
-                    align = "right",
-                    columns = 4
-                  ) %>% cols_align(
-                    align = "right",
-                    columns = 5
-                  ) %>% cols_align(
-                    align = "right",
-                    columns = 7
-                  ) %>% cols_align(
-                    align = "right",
-                    columns = 8
-                  ) %>% cols_align(
-                    align = "right",
-                    columns = 9
-                  ) %>% cols_align(
-                    align = "center",
-                    columns = 10
-                  ) %>% cols_align(
-                    align = "center",
-                    columns = 11
-                  )  %>%
-  tab_options(table.font.size = px(11)) %>%  opt_table_font(
-    font = list(
-      google_font(name = "Roboto Condensed")
-    )
-  ) %>% data_color(
-    palette = "Reds",
-    columns = "Qualification/Regulation"
-  )%>%  data_color(
-    
-    columns = "Pld",
-    colors = scales::col_numeric("#488A99", n = 2 , domain = NULL),
-    alpha = NULL,
-    apply_to = c("fill", "text"),
-    autocolor_text = TRUE
-  ) %>% data_color(
-    
-    columns = "W",
-    colors = scales::col_numeric("#1C4E80", n = 2 , domain = NULL),
-    alpha = NULL,
-    apply_to = c("fill", "text"),
-    autocolor_text = TRUE
-  ) %>% data_color(
-    
-    columns = "D",
-    colors = scales::col_numeric("#CD5C5C", n = 2 , domain = NULL),
-    alpha = NULL,
-    apply_to = c("fill", "text"),
-    autocolor_text = TRUE
-  ) %>% data_color(
-    
-    columns = "L",
-    colors = scales::col_numeric("#AC3E31", n = 2 , domain = NULL),
-    alpha = NULL,
-    apply_to = c("fill", "text"),
-    autocolor_text = TRUE
-  ) %>% data_color(
-    
-    columns = "GF",
-    colors = scales::col_numeric("#7E909A", n = 2 , domain = NULL),
-    alpha = NULL,
-    apply_to = c("fill", "text"),
-    autocolor_text = TRUE
-  ) %>% data_color(
-    
-    columns = "GA",
-    colors = scales::col_numeric("#A5D8DD", n = 2 , domain = NULL),
-    alpha = NULL,
-    apply_to = c("fill", "text"),
-    autocolor_text = TRUE
-  )  %>% data_color(
-    
-    columns = "GD",
-    colors = scales::col_factor("#DBAE58", n = 2 , domain = NULL),
-    alpha = NULL,
-    apply_to = c("fill", "text"),
-    autocolor_text = TRUE
-  ) %>% data_color(
-    
-    columns = "Team",
-    colors = scales::col_factor("#CED2CC", n = 2 , domain = NULL),
-    alpha = NULL,
-    apply_to = c("fill", "text"),
-    autocolor_text = TRUE
-  ) %>% data_color(
-    
-    columns = "Pos",
-    colors = scales::col_factor("#CED2CC", n = 2 , domain = NULL),
-    alpha = NULL,
-    apply_to = c("fill", "text"),
-    autocolor_text = TRUE
-  )%>% data_color(
-    
-    columns = "Badge",
-    colors = scales::col_factor("#CED2CC", n = 2 , domain = NULL),
-    alpha = NULL,
-    apply_to = c("fill", "text"),
-    autocolor_text = TRUE
-  ) %>% data_color(
-    
-    columns = "Pts"
-  ) %>%
-  text_transform(
-    locations = cells_body(c(Badge)),
-    fn = function(x) {
-      web_image(url = logolist) 
-    }
-  ) %>% tab_options(table.font.size = px(12)) %>%
-  opt_table_font(
-    font = list(
-      google_font(name = "Roboto Condensed")
-      
-    )
-  ) %>% tab_options(column_labels.font.size = 11.5, column_labels.font.weight = "bold", data_row.padding = px(5)) %>% tab_source_note(
-    source_note = md("*Source: Wikipedia & The English Premier League (Official Website)*")
-  )%>% tab_source_note(
-    source_note = md(sprintf("Last successful Webscrape time was %s", WebscrapeTime ))
-  )  %>% opt_css(
-    css = "
-      .topstrikerflags {
-      border-radius: 80%
-    }
-    "
-  ) %>% gtsave(filename = "TableEPL.html")
+writeLines(html, file)
+
+# =========================================================
+# OUTPUT
+# =========================================================
+cat('Saved to:\\n')
+cat(normalizePath(file))
+cat('\\n')

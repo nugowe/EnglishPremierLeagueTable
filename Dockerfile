@@ -1,45 +1,40 @@
-FROM rocker/tidyverse As R-code
+FROM rocker/tidyverse:latest AS r_build
 
 WORKDIR /opt/epl
 
-ENV TZ="America/Chicago"
+ENV TZ=America/Chicago
 
 COPY . .
 
-RUN apt-get update && apt-get install -yq \
-  curl \
-  apt-utils 
-
-RUN apt-get install -yq tzdata && \
+RUN apt-get update && \
+    apt-get install -y \
+      curl \
+      apt-utils \
+      tzdata && \
     ln -fs /usr/share/zoneinfo/America/Chicago /etc/localtime && \
     dpkg-reconfigure -f noninteractive tzdata
-    
+
+# Run R build script
 RUN bash /opt/epl/scripts/build.sh
 
-FROM node:16-slim
 
-RUN npm install -g http-server
-    
-#FROM nginx:alpine AS nginx-code
+# =========================
+# NGINX STAGE
+# =========================
+FROM nginx:alpine
 
-WORKDIR /opt/nginx
+COPY . .
 
-#RUN chown -R nginx:nginx /usr/share/
+COPY nginx.conf /etc/nginx/nginx.conf
 
-#RUN mkdir /usr/share/data && mkdir /usr/share/data/www
+COPY --from=r_build \
+  /opt/epl/TableEPL.html \
+  /usr/share/nginx/html
 
-COPY --from=R-code /opt/epl/TableEPL.html .
+COPY index.html /usr/share/nginx/html/index.html
 
-#COPY --from=R-code /opt/epl/EPLTable.html /usr/share/data/www
-
-#RUN mv /usr/share/data/www/EPLTable.html /usr/share/data/www/index.html
-
-#RUN mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.ORIGINAL && touch /etc/nginx/nginx.conf 
-
-#RUN sh /opt/nginx/scripts/nginx.sh
+COPY img/arsenal_champions.png /usr/share/nginx/html/arsenal_champions.png
 
 EXPOSE 8080
 
-#ENTRYPOINT ["nginx", "-g", "daemon off;"]
-
-ENTRYPOINT ["http-server", ".", "-p", "8080"]
+CMD ["nginx", "-g", "daemon off;"]
